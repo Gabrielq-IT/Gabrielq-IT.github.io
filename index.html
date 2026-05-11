@@ -533,20 +533,33 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('.stat-box').forEach(el => counterObserver.observe(el));
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const n = document.getElementById('fname').value.trim();
     const e = document.getElementById('femail').value.trim();
     const m = document.getElementById('fmessage').value.trim();
     if (!n || !e || !m) { alert('Por favor rellena todos los campos. / Please fill all fields.'); return; }
     const btn = document.getElementById('submitBtn');
     btn.textContent = '...'; btn.disabled = true;
-    setTimeout(() => {
-      btn.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-      document.getElementById('fname').value = '';
-      document.getElementById('femail').value = '';
-      document.getElementById('fmessage').value = '';
-    }, 1000);
+    try {
+      const res = await fetch('https://formspree.io/f/mykolpag', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: n, email: e, message: m })
+      });
+      if (res.ok) {
+        btn.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        document.getElementById('fname').value = '';
+        document.getElementById('femail').value = '';
+        document.getElementById('fmessage').value = '';
+      } else {
+        btn.textContent = 'Error — inténtalo de nuevo';
+        btn.disabled = false;
+      }
+    } catch(err) {
+      btn.textContent = 'Error — inténtalo de nuevo';
+      btn.disabled = false;
+    }
   }
 </script>
 </body>
