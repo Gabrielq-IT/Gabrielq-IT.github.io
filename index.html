@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gabriel Quiñones — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0a; --bg2: #111111; --bg3: #181818;
+    --accent: #00ff87; --text: #e8e8e0; --muted: #666660; --border: #252525;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; cursor: none; }
+
+  .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transition: width 0.2s, height 0.2s, opacity 0.2s; opacity: 0.5; }
+
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9997; opacity: 0.35; }
+
+  .lang-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; display: flex; border: 1px solid var(--border); overflow: hidden; }
+  .lang-btn { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; padding: 0.5rem 0.9rem; background: var(--bg2); color: var(--muted); border: none; cursor: none; transition: background 0.2s, color 0.2s; text-transform: uppercase; }
+  .lang-btn.active { background: var(--accent); color: #000; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
+  .section-tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 6rem; max-width: 100%; padding-left: 3rem; padding-right: 3rem; position: relative; overflow: hidden; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+  .hero-name { font-family: var(--font-display); font-size: clamp(4rem, 12vw, 11rem); line-height: 0.88; color: var(--text); opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+  .hero-name span { color: var(--accent); }
+  .hero-role { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+  .hero-tagline { font-size: 1.05rem; color: var(--muted); margin-top: 1.25rem; max-width: 540px; line-height: 1.8; opacity: 0; animation: fadeUp 0.8s 0.55s forwards; }
+  .hero-cta { margin-top: 3rem; display: flex; gap: 1.25rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .btn { display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 2rem; border: 1px solid; cursor: none; transition: background 0.2s, color 0.2s, transform 0.15s; }
+  .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); }
+  .btn-primary:hover { background: transparent; color: var(--accent); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .hero-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
+  .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,255,135,0.08) 0%, transparent 70%); top: 10%; right: -10%; pointer-events: none; animation: pulse 6s ease-in-out infinite; }
+
+  #about { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; border-top: 1px solid var(--border); }
+  .about-number { font-family: var(--font-display); font-size: 9rem; line-height: 1; color: var(--border); margin-bottom: -1rem; }
+  .about-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; margin-bottom: 1.5rem; }
+  .about-text { color: var(--muted); line-height: 1.9; font-size: 1.05rem; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+  .stat-box { border: 1px solid var(--border); padding: 1.25rem 1.5rem; transition: border-color 0.2s; }
+  .stat-box:hover { border-color: var(--accent); }
+  .stat-num { font-family: var(--font-display); font-size: 2.5rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-top: 0.3rem; }
+
+  #skills { border-top: 1px solid var(--border); }
+  .skills-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; border: 1px solid var(--border); }
+  .skill-card { background: var(--bg2); padding: 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.2s; position: relative; overflow: hidden; }
+  .skill-card::before { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--accent); transition: width 0.35s ease; }
+  .skill-card:hover { background: var(--bg3); }
+  .skill-card:hover::before { width: 100%; }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .skill-name { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--text); margin-bottom: 0.5rem; }
+  .skill-bar-bg { height: 2px; background: var(--border); margin-top: 1rem; }
+  .skill-bar { height: 2px; background: var(--accent); transition: width 1.2s ease; width: 0; }
+  .skill-desc { font-size: 0.82rem; color: var(--muted); margin-top: 0.5rem; }
+
+  #projects { border-top: 1px solid var(--border); }
+  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+  .projects-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; }
+  .project-item { display: grid; grid-template-columns: 3fr 1fr 1fr; align-items: center; gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--border); cursor: none; transition: padding-left 0.25s; position: relative; }
+  .project-item:last-child { border-bottom: 1px solid var(--border); }
+  .project-item:hover { padding-left: 1.5rem; }
+  .project-item:hover .project-name { color: var(--accent); }
+  .project-num { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; transition: opacity 0.2s; }
+  .project-item:hover .project-num { opacity: 1; }
+  .project-name { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2.2rem); line-height: 1; transition: color 0.2s; }
+  .project-sub { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
+  .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tag { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; border: 1px solid var(--border); color: var(--muted); text-transform: uppercase; transition: border-color 0.2s, color 0.2s; }
+  .project-item:hover .tag { border-color: var(--accent); color: var(--accent); }
+  .project-note { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); text-align: right; font-style: italic; }
+
+  #experience { border-top: 1px solid var(--border); }
+  .exp-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; padding: 2.5rem 0; border-top: 1px solid var(--border); }
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+  .exp-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; padding-top: 0.25rem; }
+  .exp-company { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; margin-bottom: 0.3rem; }
+  .exp-role { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.85rem; }
+  .exp-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
+
+  #contact { border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+  .contact-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin-bottom: 1.5rem; }
+  .contact-title span { color: var(--accent); }
+  .contact-sub { color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
+  .contact-email { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-top: 2rem; display: block; text-decoration: none; letter-spacing: 0.05em; }
+  .contact-email:hover { text-decoration: underline; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { display: block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .form-group input, .form-group textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-family: var(--font-body); font-size: 0.92rem; padding: 0.85rem 1rem; outline: none; transition: border-color 0.2s; cursor: none; resize: vertical; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { min-height: 130px; }
+  .form-submit { width: 100%; background: var(--accent); color: #000; border: 1px solid var(--accent); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 1rem; cursor: none; transition: background 0.2s, color 0.2s; margin-top: 0.5rem; }
+  .form-submit:hover { background: transparent; color: var(--accent); }
+  .form-success { display: none; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.1em; margin-top: 0.75rem; text-align: center; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; flex-wrap: wrap; gap: 1rem; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.15); opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* i18n */
+  [data-lang] { display: none; }
+  .lang-es [data-lang="es"] { display: block; }
+  .lang-en [data-lang="en"] { display: block; }
+  span[data-lang] { display: none; }
+  .lang-es span[data-lang="es"] { display: inline; }
+  .lang-en span[data-lang="en"] { display: inline; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    #about, #contact { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .project-item { grid-template-columns: 1fr; }
+    .project-note { text-align: left; }
+    footer { flex-direction: column; text-align: center; }
+    body, input, textarea, button { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .lang-toggle { bottom: 1rem; right: 1rem; }
+  }
+</style>
+</head>
+<body class="lang-es">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btnEs" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+</div>
+
+<nav>
+  <div class="nav-logo">// gabriel.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about"><span data-lang="es">Sobre mí</span><span data-lang="en">About</span></a></li>
+    <li><a href="#skills">Stack</a></li>
+    <li><a href="#projects"><span data-lang="es">Proyectos</span><span data-lang="en">Projects</span></a></li>
+    <li><a href="#experience"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></a></li>
+    <li><a href="#contact"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></a></li>
+  </ul>
+</nav>
+
+<div id="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">
+      <span data-lang="es">→ Disponible para proyectos freelance</span>
+      <span data-lang="en">→ Available for freelance projects</span>
+    </p>
+    <h1 class="hero-name">GABRIEL<br><span>QUIÑONES</span></h1>
+    <p class="hero-role">Full Stack Dev · HW Engineer · GBSAR Specialist</p>
+    <p class="hero-tagline">
+      <span data-lang="es">Ingeniero de Sistemas TIC (UPC) con experiencia en desarrollo de software y diseño hardware. Construyo soluciones digitales limpias, eficientes y bien hechas.</span>
+      <span data-lang="en">ICT Systems Engineer (UPC) with experience in software development and hardware design. I build clean, efficient and well-crafted digital solutions.</span>
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">
+        <span data-lang="es">Ver proyectos</span><span data-lang="en">View projects</span>
+      </a>
+      <a href="#contact" class="btn btn-ghost">
+        <span data-lang="es">Contratarme</span><span data-lang="en">Hire me</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div>
+    <div class="about-number reveal">01</div>
+    <p class="section-tag reveal"><span data-lang="es">Sobre mí</span><span data-lang="en">About me</span></p>
+  </div>
+  <div>
+    <h2 class="about-title reveal">Engineer.<br>Builder.<br>Solver.</h2>
+    <p class="about-text reveal">
+      <span data-lang="es">Soy <strong>Gabriel Quiñones</strong>, Ingeniero de Sistemas TIC graduado en la <strong>UPC (Barcelona)</strong>. Actualmente trabajo en <strong>MWSE</strong> como Electronic/RF/Microwave HW Engineer y estoy disponible para proyectos freelance de desarrollo de software fuera de mi jornada.<br><br>Mi combinación de formación en <strong>hardware y software</strong> me permite abordar problemas técnicos desde múltiples ángulos y ofrecer soluciones integrales.</span>
+      <span data-lang="en">I'm <strong>Gabriel Quiñones</strong>, an ICT Systems Engineer graduated from <strong>UPC (Barcelona)</strong>. I currently work at <strong>MWSE</strong> as an Electronic/RF/Microwave HW Engineer and I'm available for freelance software development projects outside of working hours.<br><br>My combination of <strong>hardware and software</strong> background allows me to tackle technical problems from multiple angles and deliver comprehensive solutions.</span>
+    </p>
+    <div class="about-stats reveal">
+      <div class="stat-box">
+        <div class="stat-num">3+</div>
+        <div class="stat-label"><span data-lang="es">Años programando</span><span data-lang="en">Years coding</span></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">UPC</div>
+        <div class="stat-label"><span data-lang="es">Ing. Sistemas TIC</span><span data-lang="en">ICT Systems Eng.</span></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label"><span data-lang="es">Idiomas (CA/ES/EN)</span><span data-lang="en">Languages (CA/ES/EN)</span></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">BCN</div>
+        <div class="stat-label"><span data-lang="es">Basado en Barcelona</span><span data-lang="en">Based in Barcelona</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-tag reveal">02 — <span data-lang="es">Stack técnico</span><span data-lang="en">Tech stack</span></p>
+  <h2 class="skills-title reveal"><span data-lang="es">Habilidades</span><span data-lang="en">Skills</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-desc"><span data-lang="es">Automatización, scripting, análisis de datos, herramientas CLI</span><span data-lang="en">Automation, scripting, data analysis, CLI tools</span></div>
+      <div class="skill-bar-bg"><div class="skill-bar" data-width="88"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-desc"><span data-lang="es">Desarrollo web, Node.js, scripting, interfaces interactivas</span><span data-lang="en">Web development, Node.js, scripting, interactive UIs</span></div>
+      <div class="skill-bar-bg"><div class="skill-bar" data-width="80"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-name">C</div>
+      <div class="skill-desc"><span data-lang="es">Sistemas embebidos, programación de bajo nivel, optimización</span><span data-lang="en">Embedded systems, low-level programming, optimization</span></div>
+      <div class="skill-bar-bg"><div class="skill-bar" data-width="78"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-desc"><span data-lang="es">Diseño de bases de datos, consultas, PostgreSQL, análisis</span><span data-lang="en">Database design, queries, PostgreSQL, analysis</span></div>
+      <div class="skill-bar-bg"><div class="skill-bar" data-width="75"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🐧</div>
+      <div class="skill-name">Linux</div>
+      <div class="skill-desc"><span data-lang="es">Administración de sistemas, bash scripting, entornos de servidor</span><span data-lang="en">System administration, bash scripting, server environments</span></div>
+      <div class="skill-bar-bg"><div class="skill-bar" data-width="82"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📡</div>
+      <div class="skill-name">RF / HW Design</div>
+      <div class="skill-desc"><span data-lang="es">Electrónica, RF, Microwave, GBSAR, diseño de hardware</span><span data-lang="en">Electronics, RF, Microwave, GBSAR, hardware design</span></div>
+      <div class="skill-bar-bg"><div class="skill-bar" data-width="85"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="projects-header">
+    <div>
+      <p class="section-tag reveal">03 — <span data-lang="es">Trabajo selecto</span><span data-lang="en">Selected work</span></p>
+      <h2 class="projects-title reveal"><span data-lang="es">Proyectos</span><span data-lang="en">Projects</span></h2>
+    </div>
+    <a href="https://github.com/Gabrielq-IT" target="_blank" class="btn btn-ghost reveal">GitHub ↗</a>
+  </div>
+  <div>
+    <div class="project-item reveal">
+      <div>
+        <span class="project-num">01</span>
+        <h3 class="project-name"><span data-lang="es">Sistema de Automatización</span><span data-lang="en">Automation System</span></h3>
+        <p class="project-sub"><span data-lang="es">Scripts Python para automatización de procesos repetitivos con reporting automático vía SQL</span><span data-lang="en">Python scripts to automate repetitive processes with automatic SQL-based reporting</span></p>
+      </div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Linux</span></div>
+      <p class="project-note"><span data-lang="es">Código privado</span><span data-lang="en">Private repo</span></p>
+    </div>
+    <div class="project-item reveal">
+      <div>
+        <span class="project-num">02</span>
+        <h3 class="project-name"><span data-lang="es">Dashboard Web</span><span data-lang="en">Web Dashboard</span></h3>
+        <p class="project-sub"><span data-lang="es">Interfaz para visualización de datos técnicos en tiempo real con backend en Node.js y base de datos SQL</span><span data-lang="en">Interface for real-time technical data visualization with Node.js backend and SQL database</span></p>
+      </div>
+      <div class="project-tags"><span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">SQL</span></div>
+      <p class="project-note"><span data-lang="es">Código privado</span><span data-lang="en">Private repo</span></p>
+    </div>
+    <div class="project-item reveal">
+      <div>
+        <span class="project-num">03</span>
+        <h3 class="project-name"><span data-lang="es">Herramienta CLI de Diagnóstico</span><span data-lang="en">Diagnostic CLI Tool</span></h3>
+        <p class="project-sub"><span data-lang="es">Tool en Python para diagnóstico y monitoreo de sistemas embebidos con interfaz de línea de comandos</span><span data-lang="en">Python tool for diagnosis and monitoring of embedded systems via command-line interface</span></p>
+      </div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">C</span><span class="tag">Linux</span></div>
+      <p class="project-note"><span data-lang="es">Código privado</span><span data-lang="en">Private repo</span></p>
+    </div>
+    <div class="project-item reveal">
+      <div>
+        <span class="project-num">04</span>
+        <h3 class="project-name">TFG — <span data-lang="es">Proyecto Fin de Grado</span><span data-lang="en">Bachelor's Thesis</span></h3>
+        <p class="project-sub"><span data-lang="es">Diseño y optimización de sistemas técnicos para aplicaciones industriales — Masats S.A. · UPC 2024</span><span data-lang="en">Design and optimization of technical systems for industrial applications — Masats S.A. · UPC 2024</span></p>
+      </div>
+      <div class="project-tags"><span class="tag">Sistemas</span><span class="tag">Industrial</span><span class="tag">UPC</span></div>
+      <p class="project-note"><span data-lang="es">Académico</span><span data-lang="en">Academic</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <p class="section-tag reveal">04 — <span data-lang="es">Trayectoria</span><span data-lang="en">Career</span></p>
+  <h2 class="exp-title reveal"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></h2>
+  <div>
+    <div class="exp-item reveal">
+      <div class="exp-date"><span data-lang="es">Ene 2025 — Actual</span><span data-lang="en">Jan 2025 — Present</span></div>
+      <div>
+        <div class="exp-company">MWSE</div>
+        <div class="exp-role">// Electronic / RF / Microwave HW Engineer · Barcelona</div>
+        <div class="exp-desc"><span data-lang="es">Experiencia en el sector de la electrónica, RF y Microwave Hardware. Diseño de hardware y desarrollo de soluciones técnicas para sistemas de comunicaciones avanzados.</span><span data-lang="en">Experience in the electronics, RF and Microwave Hardware sector. Hardware design and development of technical solutions for advanced communication systems.</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date"><span data-lang="es">Ene 2024 — Jul 2024</span><span data-lang="en">Jan 2024 — Jul 2024</span></div>
+      <div>
+        <div class="exp-company">Masats S.A.</div>
+        <div class="exp-role">// Intern & TFG · Barcelona</div>
+        <div class="exp-desc"><span data-lang="es">Proyectos de ingeniería orientados al diseño y optimización de sistemas. Desarrollo de sistemas técnicos aplicados a entornos industriales. Proyecto de Fin de Grado.</span><span data-lang="en">Engineering projects focused on system design and optimization. Development of technical systems for industrial environments. Final Degree Project.</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date"><span data-lang="es">Oct 2023 — Dic 2023</span><span data-lang="en">Oct 2023 — Dec 2023</span></div>
+      <div>
+        <div class="exp-company">Digital Centre S.L.</div>
+        <div class="exp-role">// Intern · Barcelona</div>
+        <div class="exp-desc"><span data-lang="es">Experiencia práctica en soluciones digitales y desarrollo de software. Participación en proyectos enfocados en sistemas digitales.</span><span data-lang="en">Hands-on experience in digital solutions and software development. Projects focused on digital systems.</span></div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">2020 — 2024</div>
+      <div>
+        <div class="exp-company">UPC</div>
+        <div class="exp-role">// <span data-lang="es">Grado en Ingeniería de Sistemas TIC</span><span data-lang="en">Bachelor's in ICT Systems Engineering</span></div>
+        <div class="exp-desc"><span data-lang="es">Universidad Politècnica de Catalunya. Materias principales: Ciencias de la Computación, Telecomunicaciones, Electrónica.</span><span data-lang="en">Polytechnic University of Catalonia. Major subjects: Computer Science, Telecommunications, Electronics.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div>
+    <p class="section-tag reveal">05 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
+    <h2 class="contact-title reveal">
+      <span data-lang="es">¿Tienes un<br><span>proyecto?</span></span>
+      <span data-lang="en">Got a<br><span>project?</span></span>
+    </h2>
+    <p class="contact-sub reveal">
+      <span data-lang="es">Estoy disponible para proyectos freelance fuera de mi jornada laboral. Respondo en menos de 24h.</span>
+      <span data-lang="en">Available for freelance projects outside of working hours. I reply within 24h.</span>
+    </p>
+    <a href="mailto:gabriel.quinones.it@gmail.com" class="contact-email reveal">→ gabriel.quinones.it@gmail.com</a>
+  </div>
+  <div class="reveal">
+    <div class="form-group">
+      <label><span data-lang="es">Nombre</span><span data-lang="en">Name</span></label>
+      <input type="text" id="fname" placeholder="John Doe" />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="femail" placeholder="john@company.com" />
+    </div>
+    <div class="form-group">
+      <label><span data-lang="es">Mensaje</span><span data-lang="en">Message</span></label>
+      <textarea id="fmessage" placeholder="..."></textarea>
+    </div>
+    <button class="form-submit" id="submitBtn" onclick="handleSubmit()">
+      <span data-lang="es">Enviar mensaje →</span><span data-lang="en">Send message →</span>
+    </button>
+    <p class="form-success" id="formSuccess">
+      <span data-lang="es">✓ Mensaje recibido. Te contactaré pronto.</span>
+      <span data-lang="en">✓ Message received. I'll get back to you soon.</span>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Gabriel Quiñones Jiménez</span>
+  <span>Barcelona — <span data-lang="es">Disponible para freelance</span><span data-lang="en">Available for freelance</span></span>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animCursor() {
+    cursor.style.left = mx - 5 + 'px'; cursor.style.top = my - 5 + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx - 18 + 'px'; ring.style.top = ry - 18 + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.querySelectorAll('a, button, input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.8'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.5'; });
+  });
+
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.getElementById('btnEs').classList.toggle('active', lang === 'es');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const barObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { const b = e.target.querySelector('.skill-bar'); if (b) b.style.width = b.dataset.width + '%'; } });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-card').forEach(el => barObserver.observe(el));
+
+  function handleSubmit() {
+    const n = document.getElementById('fname').value.trim();
+    const e = document.getElementById('femail').value.trim();
+    const m = document.getElementById('fmessage').value.trim();
+    if (!n || !e || !m) { alert('Por favor rellena todos los campos. / Please fill all fields.'); return; }
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = '...'; btn.disabled = true;
+    setTimeout(() => {
+      btn.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      document.getElementById('fname').value = '';
+      document.getElementById('femail').value = '';
+      document.getElementById('fmessage').value = '';
+    }, 1000);
+  }
+</script>
+</body>
+</html>
