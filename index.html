@@ -9,8 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0a0a0a; --bg2: #111111; --bg3: #181818;
-    --accent: #00ff87; --text: #e8e8e0; --muted: #666660; --border: #252525;
+    --bg: #0f0f1a;
+    --bg2: #161628;
+    --bg3: #1e1e35;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --text: #f0f0ff;
+    --muted: #8888aa;
+    --border: #2a2a45;
     --font-display: 'Bebas Neue', sans-serif;
     --font-mono: 'DM Mono', monospace;
     --font-body: 'DM Sans', sans-serif;
@@ -19,111 +26,132 @@
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; cursor: none; }
 
-  .cursor { position: fixed; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
-  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transition: width 0.2s, height 0.2s, opacity 0.2s; opacity: 0.5; }
+  /* CURSOR */
+  .cursor { position: fixed; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: screen; transition: transform 0.1s; }
+  .cursor-ring { position: fixed; width: 40px; height: 40px; border: 1.5px solid var(--accent2); border-radius: 50%; pointer-events: none; z-index: 9998; transition: width 0.2s, height 0.2s, opacity 0.2s; opacity: 0.6; }
 
-  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9997; opacity: 0.35; }
+  /* NOISE */
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9997; opacity: 0.25; }
 
-  .lang-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; display: flex; border: 1px solid var(--border); overflow: hidden; }
+  /* LANG TOGGLE */
+  .lang-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; display: flex; border: 1px solid var(--border); overflow: hidden; border-radius: 4px; }
   .lang-btn { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; padding: 0.5rem 0.9rem; background: var(--bg2); color: var(--muted); border: none; cursor: none; transition: background 0.2s, color 0.2s; text-transform: uppercase; }
-  .lang-btn.active { background: var(--accent); color: #000; }
+  .lang-btn.active { background: var(--accent); color: #fff; }
 
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(15,15,26,0.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent2); letter-spacing: 0.05em; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--accent2); }
 
   section { padding: 7rem 3rem; max-width: 1200px; margin: 0 auto; }
-  .section-tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .section-tag { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem; }
 
+  /* HERO */
   #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 6rem; max-width: 100%; padding-left: 3rem; padding-right: 3rem; position: relative; overflow: hidden; }
-  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
-  .hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+  .hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.25em; color: var(--accent2); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
   .hero-name { font-family: var(--font-display); font-size: clamp(4rem, 12vw, 11rem); line-height: 0.88; color: var(--text); opacity: 0; animation: fadeUp 0.8s 0.35s forwards; position: relative; }
-  .hero-name span { color: var(--accent); }
-  .hero-name::before, .hero-name::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-family: var(--font-display); font-size: inherit; line-height: inherit; pointer-events: none; }
+  .hero-name span { color: var(--accent); -webkit-text-stroke: 0px; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-name::before, .hero-name::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-family: var(--font-display); font-size: inherit; line-height: inherit; pointer-events: none; -webkit-text-fill-color: initial; background: none; }
   .hero-name::before { color: #ff003c; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); animation: glitch-top 4s infinite 1.5s; opacity: 0; }
-  .hero-name::after  { color: #00c9ff; clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); animation: glitch-bot 4s infinite 1.5s; opacity: 0; }
+  .hero-name::after  { color: var(--accent2); clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); animation: glitch-bot 4s infinite 1.5s; opacity: 0; }
   @keyframes glitch-top { 0%,88%,100%{transform:translateX(0);opacity:0} 90%{transform:translateX(-5px);opacity:0.8} 92%{transform:translateX(5px);opacity:0.8} 94%{transform:translateX(-2px);opacity:0.6} 96%{transform:translateX(0);opacity:0} }
   @keyframes glitch-bot { 0%,88%,100%{transform:translateX(0);opacity:0} 91%{transform:translateX(5px);opacity:0.8} 93%{transform:translateX(-5px);opacity:0.8} 95%{transform:translateX(2px);opacity:0.6} 97%{transform:translateX(0);opacity:0} }
-  /* typewriter cursor */
-  .typewriter-cursor { display: inline-block; width: 3px; height: 0.8em; background: var(--accent); margin-left: 4px; vertical-align: middle; animation: blink 0.8s step-end infinite; }
+  .typewriter-cursor { display: inline-block; width: 3px; height: 0.8em; background: var(--accent2); margin-left: 4px; vertical-align: middle; animation: blink 0.8s step-end infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-  .hero-role { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+  .hero-role { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent2); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; min-height: 1.4em; }
   .hero-tagline { font-size: 1.05rem; color: var(--muted); margin-top: 1.25rem; max-width: 540px; line-height: 1.8; opacity: 0; animation: fadeUp 0.8s 0.55s forwards; }
   .hero-cta { margin-top: 3rem; display: flex; gap: 1.25rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
-  .btn { display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 2rem; border: 1px solid; cursor: none; transition: background 0.2s, color 0.2s, transform 0.15s; }
-  .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); }
-  .btn-primary:hover { background: transparent; color: var(--accent); transform: translateY(-2px); }
+  .btn { display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 2rem; border: 1px solid; cursor: none; transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s; border-radius: 3px; }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 0 24px rgba(124,58,237,0.4); }
+  .btn-primary:hover { background: transparent; color: var(--accent); transform: translateY(-2px); box-shadow: 0 0 40px rgba(124,58,237,0.6); }
   .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-  .hero-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
-  .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,255,135,0.08) 0%, transparent 70%); top: 10%; right: -10%; pointer-events: none; animation: pulse 6s ease-in-out infinite; }
+  .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); box-shadow: 0 0 24px rgba(6,182,212,0.2); }
+  .hero-grid-lines { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(to right, rgba(124,58,237,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(124,58,237,0.04) 1px, transparent 1px); background-size: 80px 80px; }
+  .hero-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.05) 50%, transparent 70%); top: 0%; right: -15%; pointer-events: none; animation: pulse 6s ease-in-out infinite; }
+  .hero-glow2 { position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%); bottom: 5%; left: -5%; pointer-events: none; animation: pulse 8s ease-in-out infinite reverse; }
 
+  /* SCRUBBING SECTION */
+  #scrub { border-top: 1px solid var(--border); padding: 0; max-width: 100%; position: relative; overflow: hidden; height: 500vh; }
+  .scrub-sticky { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .scrub-canvas-wrap { position: relative; width: 100%; max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  #scrubCanvas { width: 100%; border-radius: 8px; display: block; box-shadow: 0 0 80px rgba(124,58,237,0.3); }
+  .scrub-label { position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); opacity: 0.7; white-space: nowrap; }
+  .scrub-progress { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); width: 200px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .scrub-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.05s linear; }
+  .scrub-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 3rem; pointer-events: none; }
+  .scrub-text { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text); line-height: 1.1; opacity: 0; transition: opacity 0.4s; }
+  .scrub-text.visible { opacity: 1; }
+
+  /* ABOUT */
   #about { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; border-top: 1px solid var(--border); }
   .about-number { font-family: var(--font-display); font-size: 9rem; line-height: 1; color: var(--border); margin-bottom: -1rem; }
-  .about-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; margin-bottom: 1.5rem; }
+  .about-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .about-text { color: var(--muted); line-height: 1.9; font-size: 1.05rem; }
   .about-text strong { color: var(--text); font-weight: 600; }
   .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-  .stat-box { border: 1px solid var(--border); padding: 1.25rem 1.5rem; transition: border-color 0.2s; }
-  .stat-box:hover { border-color: var(--accent); }
-  .stat-num { font-family: var(--font-display); font-size: 2.5rem; color: var(--accent); line-height: 1; }
+  .stat-box { border: 1px solid var(--border); padding: 1.25rem 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; border-radius: 4px; background: var(--bg2); }
+  .stat-box:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(124,58,237,0.15); }
+  .stat-num { font-family: var(--font-display); font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
   .stat-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-top: 0.3rem; }
 
+  /* SKILLS */
   #skills { border-top: 1px solid var(--border); }
-  .skills-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; border: 1px solid var(--border); }
-  .skill-card { background: var(--bg2); padding: 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.2s; position: relative; overflow: hidden; }
-  .skill-card::before { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--accent); transition: width 0.35s ease; }
+  .skills-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .skill-card { background: var(--bg2); padding: 2rem; transition: background 0.2s; position: relative; overflow: hidden; }
+  .skill-card::before { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.35s ease; }
   .skill-card:hover { background: var(--bg3); }
   .skill-card:hover::before { width: 100%; }
   .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
   .skill-name { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--text); margin-bottom: 0.5rem; }
-  .skill-bar-bg { height: 2px; background: var(--border); margin-top: 1rem; }
-  .skill-bar { height: 2px; background: var(--accent); transition: width 1.2s ease; width: 0; }
+  .skill-bar-bg { height: 2px; background: var(--border); margin-top: 1rem; border-radius: 2px; }
+  .skill-bar { height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 1.2s ease; width: 0; border-radius: 2px; }
   .skill-desc { font-size: 0.82rem; color: var(--muted); margin-top: 0.5rem; }
 
+  /* PROJECTS */
   #projects { border-top: 1px solid var(--border); }
   .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
-  .projects-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; }
+  .projects-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .project-item { display: grid; grid-template-columns: 3fr 1fr 1fr; align-items: center; gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--border); cursor: none; transition: padding-left 0.25s; position: relative; }
   .project-item:last-child { border-bottom: 1px solid var(--border); }
   .project-item:hover { padding-left: 1.5rem; }
-  .project-item:hover .project-name { color: var(--accent); }
-  .project-num { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; transition: opacity 0.2s; }
+  .project-item:hover .project-name { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .project-num { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.1em; position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; transition: opacity 0.2s; }
   .project-item:hover .project-num { opacity: 1; }
-  .project-name { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2.2rem); line-height: 1; transition: color 0.2s; }
+  .project-name { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2.2rem); line-height: 1; transition: all 0.2s; }
   .project-sub { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
   .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .tag { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; border: 1px solid var(--border); color: var(--muted); text-transform: uppercase; transition: border-color 0.2s, color 0.2s; }
-  .project-item:hover .tag { border-color: var(--accent); color: var(--accent); }
+  .tag { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; border: 1px solid var(--border); color: var(--muted); text-transform: uppercase; transition: border-color 0.2s, color 0.2s, background 0.2s; border-radius: 3px; }
+  .project-item:hover .tag { border-color: var(--accent); color: var(--accent); background: rgba(124,58,237,0.08); }
   .project-note { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); text-align: right; font-style: italic; }
 
+  /* EXPERIENCE */
   #experience { border-top: 1px solid var(--border); }
-  .exp-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; }
+  .exp-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; padding: 2.5rem 0; border-top: 1px solid var(--border); }
   .exp-item:last-child { border-bottom: 1px solid var(--border); }
   .exp-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; padding-top: 0.25rem; }
   .exp-company { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; margin-bottom: 0.3rem; }
-  .exp-role { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 0.85rem; }
+  .exp-role { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent2); letter-spacing: 0.08em; margin-bottom: 0.85rem; }
   .exp-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
 
+  /* CONTACT */
   #contact { border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
   .contact-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin-bottom: 1.5rem; }
-  .contact-title span { color: var(--accent); }
-  .contact-sub { color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
-  .contact-email { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-top: 2rem; display: block; text-decoration: none; letter-spacing: 0.05em; }
+  .contact-title span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .contact-email { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent2); margin-top: 2rem; display: block; text-decoration: none; letter-spacing: 0.05em; }
   .contact-email:hover { text-decoration: underline; }
   .form-group { margin-bottom: 1.25rem; }
   .form-group label { display: block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-  .form-group input, .form-group textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-family: var(--font-body); font-size: 0.92rem; padding: 0.85rem 1rem; outline: none; transition: border-color 0.2s; cursor: none; resize: vertical; }
-  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group input, .form-group textarea { width: 100%; background: var(--bg2); border: 1px solid var(--border); color: var(--text); font-family: var(--font-body); font-size: 0.92rem; padding: 0.85rem 1rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; cursor: none; resize: vertical; border-radius: 4px; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 16px rgba(124,58,237,0.15); }
   .form-group textarea { min-height: 130px; }
-  .form-submit { width: 100%; background: var(--accent); color: #000; border: 1px solid var(--accent); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 1rem; cursor: none; transition: background 0.2s, color 0.2s; margin-top: 0.5rem; }
-  .form-submit:hover { background: transparent; color: var(--accent); }
-  .form-success { display: none; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.1em; margin-top: 0.75rem; text-align: center; }
+  .form-submit { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 1rem; cursor: none; transition: opacity 0.2s, transform 0.15s; margin-top: 0.5rem; border-radius: 4px; box-shadow: 0 0 30px rgba(124,58,237,0.3); }
+  .form-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+  .form-success { display: none; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent2); letter-spacing: 0.1em; margin-top: 0.75rem; text-align: center; }
 
   footer { border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; flex-wrap: wrap; gap: 1rem; }
 
@@ -132,8 +160,8 @@
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* particles canvas */
   #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
   [data-lang] { display: none; }
   .lang-es [data-lang="es"] { display: block; }
   .lang-en [data-lang="en"] { display: block; }
@@ -143,8 +171,7 @@
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
@@ -159,6 +186,7 @@
     body, input, textarea, button { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
     .lang-toggle { bottom: 1rem; right: 1rem; }
+    #scrub { height: 300vh; }
   }
 </style>
 </head>
@@ -178,15 +206,18 @@
   <ul class="nav-links">
     <li><a href="#about"><span data-lang="es">Sobre mí</span><span data-lang="en">About</span></a></li>
     <li><a href="#skills">Stack</a></li>
+    <li><a href="#scrub"><span data-lang="es">Proceso</span><span data-lang="en">Process</span></a></li>
     <li><a href="#projects"><span data-lang="es">Proyectos</span><span data-lang="en">Projects</span></a></li>
     <li><a href="#experience"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></a></li>
     <li><a href="#contact"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></a></li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <div id="hero">
   <div class="hero-grid-lines"></div>
   <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
   <div class="hero-inner">
     <p class="hero-eyebrow">
       <span data-lang="es">→ Disponible para proyectos freelance</span>
@@ -209,6 +240,7 @@
   </div>
 </div>
 
+<!-- ABOUT -->
 <section id="about">
   <div>
     <div class="about-number reveal">01</div>
@@ -222,7 +254,7 @@
     </p>
     <div class="about-stats reveal">
       <div class="stat-box">
-        <div class="stat-num">3+</div>
+        <div class="stat-num" id="cnt1">3+</div>
         <div class="stat-label"><span data-lang="es">Años programando</span><span data-lang="en">Years coding</span></div>
       </div>
       <div class="stat-box">
@@ -230,7 +262,7 @@
         <div class="stat-label"><span data-lang="es">Ing. Sistemas TIC</span><span data-lang="en">ICT Systems Eng.</span></div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">3</div>
+        <div class="stat-num" id="cnt2">3</div>
         <div class="stat-label"><span data-lang="es">Idiomas (CA/ES/EN)</span><span data-lang="en">Languages (CA/ES/EN)</span></div>
       </div>
       <div class="stat-box">
@@ -241,6 +273,7 @@
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <p class="section-tag reveal">02 — <span data-lang="es">Stack técnico</span><span data-lang="en">Tech stack</span></p>
   <h2 class="skills-title reveal"><span data-lang="es">Habilidades</span><span data-lang="en">Skills</span></h2>
@@ -284,10 +317,28 @@
   </div>
 </section>
 
+<!-- SCRUBBING SECTION -->
+<div id="scrub">
+  <div class="scrub-sticky">
+    <div class="scrub-canvas-wrap">
+      <span class="scrub-label">
+        <span data-lang="es">↓ Scroll para explorar el proceso</span>
+        <span data-lang="en">↓ Scroll to explore the process</span>
+      </span>
+      <canvas id="scrubCanvas" width="900" height="506"></canvas>
+      <div class="scrub-overlay">
+        <div class="scrub-text" id="scrubText"></div>
+      </div>
+      <div class="scrub-progress"><div class="scrub-progress-fill" id="scrubFill"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
 <section id="projects">
   <div class="projects-header">
     <div>
-      <p class="section-tag reveal">03 — <span data-lang="es">Trabajo selecto</span><span data-lang="en">Selected work</span></p>
+      <p class="section-tag reveal">04 — <span data-lang="es">Trabajo selecto</span><span data-lang="en">Selected work</span></p>
       <h2 class="projects-title reveal"><span data-lang="es">Proyectos</span><span data-lang="en">Projects</span></h2>
     </div>
     <a href="https://github.com/Gabrielq-IT" target="_blank" class="btn btn-ghost reveal">GitHub ↗</a>
@@ -332,8 +383,9 @@
   </div>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience">
-  <p class="section-tag reveal">04 — <span data-lang="es">Trayectoria</span><span data-lang="en">Career</span></p>
+  <p class="section-tag reveal">05 — <span data-lang="es">Trayectoria</span><span data-lang="en">Career</span></p>
   <h2 class="exp-title reveal"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></h2>
   <div>
     <div class="exp-item reveal">
@@ -371,14 +423,14 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div>
-    <p class="section-tag reveal">05 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
+    <p class="section-tag reveal">06 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
     <h2 class="contact-title reveal">
       <span data-lang="es">¿Tienes un<br><span>proyecto?</span></span>
       <span data-lang="en">Got a<br><span>project?</span></span>
     </h2>
-
     <a href="mailto:gabriel.quinones.it@gmail.com" class="contact-email reveal">→ gabriel.quinones.it@gmail.com</a>
   </div>
   <div class="reveal">
@@ -410,21 +462,23 @@
 </footer>
 
 <script>
+  // CURSOR
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
   (function animCursor() {
-    cursor.style.left = mx - 5 + 'px'; cursor.style.top = my - 5 + 'px';
+    cursor.style.left = mx - 6 + 'px'; cursor.style.top = my - 6 + 'px';
     rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx - 18 + 'px'; ring.style.top = ry - 18 + 'px';
+    ring.style.left = rx - 20 + 'px'; ring.style.top = ry - 20 + 'px';
     requestAnimationFrame(animCursor);
   })();
   document.querySelectorAll('a, button, input, textarea').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.8'; });
-    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.5'; });
+    el.addEventListener('mouseenter', () => { ring.style.width = '60px'; ring.style.height = '60px'; ring.style.opacity = '0.9'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '40px'; ring.style.height = '40px'; ring.style.opacity = '0.6'; });
   });
 
+  // LANG
   function setLang(lang) {
     document.body.className = 'lang-' + lang;
     document.getElementById('btnEs').classList.toggle('active', lang === 'es');
@@ -432,43 +486,44 @@
     document.documentElement.lang = lang;
   }
 
+  // SCROLL REVEAL
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  // SKILL BARS
   const barObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { const b = e.target.querySelector('.skill-bar'); if (b) b.style.width = b.dataset.width + '%'; } });
   }, { threshold: 0.3 });
   document.querySelectorAll('.skill-card').forEach(el => barObserver.observe(el));
 
   // PARTICLES
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let W, H, dots = [];
-  function resizeCanvas() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-  for (let i = 0; i < 60; i++) {
-    dots.push({ x: Math.random()*1920, y: Math.random()*1080, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, r: Math.random()*1.5+0.5, o: Math.random()*0.4+0.1 });
+  const pCanvas = document.getElementById('particles');
+  const pCtx = pCanvas.getContext('2d');
+  let PW, PH, dots = [];
+  function resizeParticles() { PW = pCanvas.width = window.innerWidth; PH = pCanvas.height = window.innerHeight; }
+  resizeParticles();
+  window.addEventListener('resize', resizeParticles);
+  for (let i = 0; i < 55; i++) {
+    dots.push({ x: Math.random()*1920, y: Math.random()*1080, vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25, r: Math.random()*1.5+0.4, o: Math.random()*0.35+0.08 });
   }
   function drawParticles() {
-    ctx.clearRect(0, 0, W, H);
+    pCtx.clearRect(0, 0, PW, PH);
     dots.forEach(d => {
       d.x += d.vx; d.y += d.vy;
-      if (d.x < 0) d.x = W; if (d.x > W) d.x = 0;
-      if (d.y < 0) d.y = H; if (d.y > H) d.y = 0;
-      ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(0,255,135,${d.o})`; ctx.fill();
+      if (d.x < 0) d.x = PW; if (d.x > PW) d.x = 0;
+      if (d.y < 0) d.y = PH; if (d.y > PH) d.y = 0;
+      pCtx.beginPath(); pCtx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+      pCtx.fillStyle = `rgba(124,58,237,${d.o})`; pCtx.fill();
     });
-    // draw lines between close dots
     for (let i = 0; i < dots.length; i++) {
       for (let j = i+1; j < dots.length; j++) {
         const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
         const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          ctx.beginPath(); ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = `rgba(0,255,135,${0.08*(1-dist/120)})`; ctx.lineWidth = 0.5; ctx.stroke();
+        if (dist < 130) {
+          pCtx.beginPath(); pCtx.moveTo(dots[i].x, dots[i].y); pCtx.lineTo(dots[j].x, dots[j].y);
+          pCtx.strokeStyle = `rgba(124,58,237,${0.07*(1-dist/130)})`; pCtx.lineWidth = 0.6; pCtx.stroke();
         }
       }
     }
@@ -477,13 +532,13 @@
   drawParticles();
 
   // TYPEWRITER
-  const roles = ['Full Stack Dev', 'HW Engineer', 'GBSAR Specialist', 'Problem Solver'];
+  const rolesES = ['Full Stack Dev', 'HW Engineer', 'GBSAR Specialist', 'Problem Solver'];
   const rolesEN = ['Full Stack Dev', 'HW Engineer', 'GBSAR Specialist', 'Problem Solver'];
   let roleIdx = 0, charIdx = 0, deleting = false;
   const roleEl = document.getElementById('heroRole');
   function typeRole() {
     const lang = document.body.classList.contains('lang-en') ? 'en' : 'es';
-    const list = lang === 'en' ? rolesEN : roles;
+    const list = lang === 'en' ? rolesEN : rolesES;
     const current = list[roleIdx % list.length];
     if (!deleting) {
       charIdx++;
@@ -499,37 +554,150 @@
   }
   setTimeout(typeRole, 1200);
 
-  // ANIMATED COUNTERS
-  function animateCounter(el, target, duration) {
-    let start = 0, startTime = null;
-    const isText = isNaN(target);
-    if (isText) { el.textContent = target; return; }
-    function step(ts) {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(ease * target) + (progress < 1 ? '' : el.dataset.suffix || '');
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = el.dataset.final || target;
-    }
-    requestAnimationFrame(step);
-  }
-  const counterObserver = new IntersectionObserver(entries => {
+  // COUNTERS
+  const counterObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        const numEl = e.target.querySelector('.stat-num');
-        if (numEl && !numEl.dataset.animated) {
-          numEl.dataset.animated = '1';
-          const raw = numEl.textContent.trim();
-          if (raw === '3+') { numEl.dataset.final = '3+'; animateCounter(numEl, 3, 1000); setTimeout(() => numEl.textContent = '3+', 1050); }
-          else if (raw === '3')  { animateCounter(numEl, 3, 800); }
-          else { /* text values: UPC, BCN, ∞ */ }
-        }
+        ['cnt1','cnt2'].forEach(id => {
+          const el = document.getElementById(id);
+          if (!el || el.dataset.done) return;
+          el.dataset.done = '1';
+          const target = parseInt(el.textContent);
+          const suffix = el.textContent.includes('+') ? '+' : '';
+          let start = null;
+          (function step(ts) {
+            if (!start) start = ts;
+            const p = Math.min((ts - start) / 900, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.floor(ease * target) + (p < 1 ? '' : suffix);
+            if (p < 1) requestAnimationFrame(step);
+          })(performance.now());
+        });
       }
     });
   }, { threshold: 0.5 });
-  document.querySelectorAll('.stat-box').forEach(el => counterObserver.observe(el));
+  document.querySelectorAll('.stat-box').forEach(el => counterObs.observe(el));
 
+  // IMAGE SCRUBBING — generative canvas animation
+  const scrubCanvas = document.getElementById('scrubCanvas');
+  const scrubCtx = scrubCanvas.getContext('2d');
+  const scrubSection = document.getElementById('scrub');
+  const scrubFill = document.getElementById('scrubFill');
+  const scrubTextEl = document.getElementById('scrubText');
+  const W = scrubCanvas.width, H = scrubCanvas.height;
+
+  const scrubStages = [
+    { es: 'Entender el problema', en: 'Understand the problem' },
+    { es: 'Diseñar la solución', en: 'Design the solution' },
+    { es: 'Escribir el código', en: 'Write the code' },
+    { es: 'Testear y refinar', en: 'Test and refine' },
+    { es: 'Entregar y desplegar', en: 'Ship and deploy' },
+  ];
+
+  function drawScrubFrame(progress) {
+    scrubCtx.clearRect(0, 0, W, H);
+    const t = progress;
+
+    // Dark background with gradient
+    const bg = scrubCtx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0, `hsl(${240 + t*40}, 40%, ${8 + t*6}%)`);
+    bg.addColorStop(1, `hsl(${260 + t*20}, 50%, ${5 + t*4}%)`);
+    scrubCtx.fillStyle = bg;
+    scrubCtx.fillRect(0, 0, W, H);
+
+    // Grid
+    scrubCtx.strokeStyle = `rgba(124,58,237,${0.06 + t*0.04})`;
+    scrubCtx.lineWidth = 0.5;
+    const gSize = 40 + t * 20;
+    for (let x = 0; x < W; x += gSize) { scrubCtx.beginPath(); scrubCtx.moveTo(x, 0); scrubCtx.lineTo(x, H); scrubCtx.stroke(); }
+    for (let y = 0; y < H; y += gSize) { scrubCtx.beginPath(); scrubCtx.moveTo(0, y); scrubCtx.lineTo(W, y); scrubCtx.stroke(); }
+
+    // Animated circuit lines
+    const numLines = Math.floor(3 + t * 8);
+    for (let i = 0; i < numLines; i++) {
+      const seed = i * 137.5;
+      const x1 = (Math.sin(seed) * 0.5 + 0.5) * W;
+      const y1 = (Math.cos(seed * 1.3) * 0.5 + 0.5) * H;
+      const x2 = x1 + Math.sin(seed * 2 + t * Math.PI) * 200 * t;
+      const y2 = y1 + Math.cos(seed * 1.7 + t * Math.PI) * 150 * t;
+      const grad = scrubCtx.createLinearGradient(x1, y1, x2, y2);
+      grad.addColorStop(0, `rgba(124,58,237,${0.6*t})`);
+      grad.addColorStop(1, `rgba(6,182,212,${0.3*t})`);
+      scrubCtx.strokeStyle = grad;
+      scrubCtx.lineWidth = 1.5;
+      scrubCtx.beginPath();
+      scrubCtx.moveTo(x1, y1);
+      scrubCtx.lineTo(Math.round((x2-x1)/gSize)*gSize + x1, y1);
+      scrubCtx.lineTo(Math.round((x2-x1)/gSize)*gSize + x1, y2);
+      scrubCtx.stroke();
+      // Node dot
+      scrubCtx.beginPath();
+      scrubCtx.arc(Math.round((x2-x1)/gSize)*gSize + x1, y2, 3, 0, Math.PI*2);
+      scrubCtx.fillStyle = `rgba(6,182,212,${0.8*t})`;
+      scrubCtx.fill();
+    }
+
+    // Central glowing orb
+    const orbX = W / 2, orbY = H / 2;
+    const orbR = 60 + t * 80;
+    const orb = scrubCtx.createRadialGradient(orbX, orbY, 0, orbX, orbY, orbR);
+    orb.addColorStop(0, `rgba(124,58,237,${0.4 + t*0.3})`);
+    orb.addColorStop(0.5, `rgba(6,182,212,${0.15 + t*0.1})`);
+    orb.addColorStop(1, 'rgba(0,0,0,0)');
+    scrubCtx.fillStyle = orb;
+    scrubCtx.beginPath();
+    scrubCtx.arc(orbX, orbY, orbR, 0, Math.PI*2);
+    scrubCtx.fill();
+
+    // Orbiting particles
+    const numDots = Math.floor(4 + t * 12);
+    for (let i = 0; i < numDots; i++) {
+      const angle = (i / numDots) * Math.PI * 2 + t * Math.PI * 2;
+      const radius = 80 + t * 100 + Math.sin(t * Math.PI * 4 + i) * 20;
+      const px = orbX + Math.cos(angle) * radius;
+      const py = orbY + Math.sin(angle) * radius * 0.6;
+      const size = 2 + t * 3;
+      scrubCtx.beginPath();
+      scrubCtx.arc(px, py, size, 0, Math.PI*2);
+      scrubCtx.fillStyle = i % 2 === 0 ? `rgba(124,58,237,${0.7*t})` : `rgba(6,182,212,${0.7*t})`;
+      scrubCtx.fill();
+    }
+
+    // Code-like text lines
+    const numCodeLines = Math.floor(t * 8);
+    scrubCtx.font = `${10 + t*2}px 'DM Mono', monospace`;
+    const codeSnippets = ['const solve = (problem) => {', '  analyze(requirements);', '  design(architecture);', '  implement(solution);', '  test(edge_cases);', '  deploy(production);', '  return success;', '}'];
+    for (let i = 0; i < Math.min(numCodeLines, codeSnippets.length); i++) {
+      const alpha = Math.min(1, (t * 8 - i) * 1.5);
+      scrubCtx.fillStyle = i === 0 ? `rgba(245,158,11,${alpha})` : `rgba(200,200,255,${alpha * 0.6})`;
+      scrubCtx.fillText(codeSnippets[i], 40, 60 + i * 22);
+    }
+
+    // Progress percent
+    scrubCtx.font = `bold ${40 + t*20}px 'Bebas Neue', sans-serif`;
+    scrubCtx.fillStyle = `rgba(255,255,255,${0.06})`;
+    scrubCtx.fillText(Math.round(t * 100) + '%', W - 160, H - 30);
+  }
+
+  function onScroll() {
+    const rect = scrubSection.getBoundingClientRect();
+    const totalH = scrubSection.offsetHeight - window.innerHeight;
+    const scrolled = -rect.top;
+    const progress = Math.max(0, Math.min(1, scrolled / totalH));
+
+    drawScrubFrame(progress);
+    scrubFill.style.width = (progress * 100) + '%';
+
+    const stageIdx = Math.min(scrubStages.length - 1, Math.floor(progress * scrubStages.length));
+    const lang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+    scrubTextEl.textContent = scrubStages[stageIdx][lang];
+    scrubTextEl.classList.toggle('visible', progress > 0.02);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  drawScrubFrame(0);
+
+  // FORM
   async function handleSubmit() {
     const n = document.getElementById('fname').value.trim();
     const e = document.getElementById('femail').value.trim();
