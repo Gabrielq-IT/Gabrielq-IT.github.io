@@ -73,14 +73,6 @@
   .hero-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.05) 50%, transparent 70%); top: 0%; right: -15%; pointer-events: none; animation: pulse 6s ease-in-out infinite; }
   .hero-glow2 { position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%); bottom: 5%; left: -5%; pointer-events: none; animation: pulse 8s ease-in-out infinite reverse; }
 
-  /* GLOBE SECTION */
-  #globe-section { border-top: 1px solid var(--border); padding: 0; max-width: 100%; position: relative; height: 100vh; }
-  .globe-sticky { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
-  #globeCanvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; cursor: grab; }
-  #globeCanvas:active { cursor: grabbing; }
-  .globe-label { position: absolute; top: 6rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); opacity: 0.7; white-space: nowrap; z-index: 2; pointer-events: none; }
-  .globe-hint { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); z-index: 2; pointer-events: none; text-align: center; }
-  .globe-connections { position: absolute; top: 6rem; right: 2rem; z-index: 2; display: flex; flex-direction: column; gap: 0.5rem; }
   .globe-btn { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.4rem 0.8rem; background: rgba(124,58,237,0.15); border: 1px solid var(--accent); color: var(--accent); cursor: none; border-radius: 3px; transition: background 0.2s; text-transform: uppercase; }
   .globe-btn:hover { background: rgba(124,58,237,0.35); }
   .globe-btn.active { background: var(--accent); color: #fff; }
@@ -137,6 +129,36 @@
   .exp-company { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; margin-bottom: 0.3rem; }
   .exp-role { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent2); letter-spacing: 0.08em; margin-bottom: 0.85rem; }
   .exp-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
+
+
+  /* EDUCATION */
+  #education { border-top: 1px solid var(--border); }
+  .edu-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 3.5rem; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .edu-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; padding: 2.5rem 0; border-top: 1px solid var(--border); }
+  .edu-item:last-child { border-bottom: 1px solid var(--border); }
+  .edu-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; padding-top: 0.25rem; }
+  .edu-school { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; margin-bottom: 0.3rem; }
+  .edu-degree { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent2); letter-spacing: 0.08em; margin-bottom: 0.85rem; }
+  .edu-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
+  .edu-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px; margin-left: 0.75rem; vertical-align: middle; }
+  .edu-badge.current { background: rgba(6,182,212,0.15); border: 1px solid var(--accent2); color: var(--accent2); }
+  .edu-badge.done { background: rgba(124,58,237,0.12); border: 1px solid var(--accent); color: var(--accent); }
+
+  /* LAB */
+  #lab { border-top: 1px solid var(--border); }
+  .lab-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .lab-sub { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 3.5rem; }
+  .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .lab-card { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg2); transition: border-color 0.2s, box-shadow 0.2s; }
+  .lab-card:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(124,58,237,0.12); }
+  .lab-card-preview { height: 220px; position: relative; overflow: hidden; }
+  .lab-card-preview canvas, .lab-card-preview #globeCanvas { width: 100% !important; height: 100% !important; display: block; }
+  .lab-card-body { padding: 1.25rem 1.5rem; }
+  .lab-card-tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.4rem; }
+  .lab-card-title { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .lab-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+  .lab-card-controls { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+  .lab-tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--muted); text-transform: uppercase; border-radius: 3px; }
 
   /* CONTACT */
   #contact { border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
@@ -206,9 +228,10 @@
   <ul class="nav-links">
     <li><a href="#about"><span data-lang="es">Sobre mí</span><span data-lang="en">About</span></a></li>
     <li><a href="#skills">Stack</a></li>
-    <li><a href="#globe-section"><span data-lang="es">Red global</span><span data-lang="en">Network</span></a></li>
     <li><a href="#projects"><span data-lang="es">Proyectos</span><span data-lang="en">Projects</span></a></li>
     <li><a href="#experience"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></a></li>
+    <li><a href="#education"><span data-lang="es">Formación</span><span data-lang="en">Education</span></a></li>
+    <li><a href="#lab">Lab</a></li>
     <li><a href="#contact"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></a></li>
   </ul>
 </nav>
@@ -317,29 +340,7 @@
   </div>
 </section>
 
-<!-- GLOBE SECTION -->
-<div id="globe-section">
-  <div class="globe-sticky">
-    <canvas id="globeCanvas"></canvas>
-    <div class="globe-label">
-      <span data-lang="es">🌍 Arrastra para rotar · Clic en ciudad para conectar</span>
-      <span data-lang="en">🌍 Drag to rotate · Click city to connect</span>
-    </div>
-    <div class="globe-connections">
-      <button class="globe-btn active" id="btnShowCities" onclick="toggleCities()">
-        <span data-lang="es">Ciudades</span><span data-lang="en">Cities</span>
-      </button>
-      <button class="globe-btn" id="btnShowArcs" onclick="toggleArcs()">
-        <span data-lang="es">Red</span><span data-lang="en">Network</span>
-      </button>
-      <button class="globe-btn" id="btnReset" onclick="resetGlobe()">Reset</button>
-    </div>
-    <div class="globe-hint">
-      <span data-lang="es">Clic en dos ciudades para crear una conexión</span>
-      <span data-lang="en">Click two cities to create a connection</span>
-    </div>
-  </div>
-</div>
+
 
 <!-- PROJECTS -->
 <section id="projects">
@@ -419,21 +420,147 @@
         <div class="exp-desc"><span data-lang="es">Experiencia práctica en soluciones digitales y desarrollo de software. Participación en proyectos enfocados en sistemas digitales.</span><span data-lang="en">Hands-on experience in digital solutions and software development. Projects focused on digital systems.</span></div>
       </div>
     </div>
-    <div class="exp-item reveal">
-      <div class="exp-date">2020 — 2024</div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-tag reveal">06 — <span data-lang="es">Formación académica</span><span data-lang="en">Education</span></p>
+  <h2 class="edu-title reveal"><span data-lang="es">Formación</span><span data-lang="en">Education</span></h2>
+  <div>
+    <div class="edu-item reveal">
+      <div class="edu-date">
+        <span data-lang="es">Sep 2025 — Jun 2026</span>
+        <span data-lang="en">Sep 2025 — Jun 2026</span>
+      </div>
       <div>
-        <div class="exp-company">UPC</div>
-        <div class="exp-role">// <span data-lang="es">Grado en Ingeniería de Sistemas TIC</span><span data-lang="en">Bachelor's in ICT Systems Engineering</span></div>
-        <div class="exp-desc"><span data-lang="es">Universidad Politècnica de Catalunya. Materias principales: Ciencias de la Computación, Telecomunicaciones, Electrónica.</span><span data-lang="en">Polytechnic University of Catalonia. Major subjects: Computer Science, Telecommunications, Electronics.</span></div>
+        <div class="edu-school">
+          MATT
+          <span class="edu-badge current"><span data-lang="es">En curso</span><span data-lang="en">In progress</span></span>
+        </div>
+        <div class="edu-degree">// <span data-lang="es">Máster en Tecnologías Avanzadas de Telecomunicación</span><span data-lang="en">Master's in Advanced Telecommunication Technologies</span></div>
+        <div class="edu-desc">
+          <span data-lang="es">Máster actualmente en curso. Especialización en tecnologías avanzadas de telecomunicaciones, sistemas de comunicación de próxima generación y diseño de sistemas RF/Microwave.</span>
+          <span data-lang="en">Master's currently in progress. Specialization in advanced telecommunications technologies, next-generation communication systems and RF/Microwave system design.</span>
+        </div>
       </div>
     </div>
+    <div class="edu-item reveal">
+      <div class="edu-date">2020 — 2024</div>
+      <div>
+        <div class="edu-school">
+          UPC
+          <span class="edu-badge done"><span data-lang="es">Completado</span><span data-lang="en">Completed</span></span>
+        </div>
+        <div class="edu-degree">// <span data-lang="es">Grado en Ingeniería de Sistemas TIC</span><span data-lang="en">Bachelor's in ICT Systems Engineering</span></div>
+        <div class="edu-desc">
+          <span data-lang="es">Universidad Politècnica de Catalunya. Materias principales: Ciencias de la Computación, Telecomunicaciones, Electrónica. TFG realizado en Masats S.A.</span>
+          <span data-lang="en">Polytechnic University of Catalonia. Major subjects: Computer Science, Telecommunications, Electronics. Final thesis at Masats S.A.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAB -->
+<section id="lab">
+  <p class="section-tag reveal">07 — <span data-lang="es">Experimentos & Skills</span><span data-lang="en">Experiments & Skills</span></p>
+  <h2 class="lab-title reveal">Lab</h2>
+  <p class="lab-sub reveal"><span data-lang="es">Demos interactivas · Habilidades en acción</span><span data-lang="en">Interactive demos · Skills in action</span></p>
+  <div class="lab-grid">
+
+    <!-- GLOBE CARD -->
+    <div class="lab-card reveal" style="grid-column: 1 / -1;">
+      <div class="lab-card-preview" style="height:500px; position:relative;">
+        <canvas id="globeCanvas" style="position:absolute;inset:0;width:100%;height:100%;cursor:grab;"></canvas>
+        <div style="position:absolute;top:1rem;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent2);opacity:0.7;white-space:nowrap;pointer-events:none;">
+          <span data-lang="es">🌍 Arrastra · Clic en ciudad para conectar</span>
+          <span data-lang="en">🌍 Drag · Click city to connect</span>
+        </div>
+        <div style="position:absolute;top:1rem;right:1rem;display:flex;flex-direction:column;gap:0.4rem;z-index:2;">
+          <button class="globe-btn active" id="btnShowCities" onclick="toggleCities()">
+            <span data-lang="es">Ciudades</span><span data-lang="en">Cities</span>
+          </button>
+          <button class="globe-btn" id="btnShowArcs" onclick="toggleArcs()">
+            <span data-lang="es">Red</span><span data-lang="en">Network</span>
+          </button>
+          <button class="globe-btn" id="btnReset" onclick="resetGlobe()">Reset</button>
+        </div>
+        <div style="position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);pointer-events:none;white-space:nowrap;">
+          <span data-lang="es">Clic en dos ciudades para crear una conexión</span>
+          <span data-lang="en">Click two cities to create a connection</span>
+        </div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-tag">Three.js · WebGL · Geospatial</div>
+        <div class="lab-card-title"><span data-lang="es">Red Global Interactiva</span><span data-lang="en">Interactive Global Network</span></div>
+        <div class="lab-card-desc">
+          <span data-lang="es">Globo terraqüi 3D interactiu amb textura de continents real, 20 ciutats i connexions personalitzades. Arrossega per rotar, clica dues ciutats per crear un arc de xarxa.</span>
+          <span data-lang="en">Interactive 3D globe with real continent texture, 20 cities and custom connections. Drag to rotate, click two cities to create a network arc.</span>
+        </div>
+        <div class="lab-card-controls">
+          <span class="lab-tag">Three.js</span>
+          <span class="lab-tag">Canvas 2D</span>
+          <span class="lab-tag">Raycasting</span>
+          <span class="lab-tag">WebGL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER CARD 2 — coming soon -->
+    <div class="lab-card reveal">
+      <div class="lab-card-preview" style="display:flex;align-items:center;justify-content:center;background:var(--bg3);">
+        <div style="text-align:center;opacity:0.3;">
+          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);">+</div>
+          <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-top:0.5rem;">
+            <span data-lang="es">Próximamente</span><span data-lang="en">Coming soon</span>
+          </div>
+        </div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-tag">RF · Signal Processing</div>
+        <div class="lab-card-title"><span data-lang="es">Visualizador de Señales RF</span><span data-lang="en">RF Signal Visualizer</span></div>
+        <div class="lab-card-desc">
+          <span data-lang="es">Simulación interactiva de señales RF, modulación y espectros de frecuencia.</span>
+          <span data-lang="en">Interactive simulation of RF signals, modulation and frequency spectra.</span>
+        </div>
+        <div class="lab-card-controls">
+          <span class="lab-tag">Canvas</span><span class="lab-tag">DSP</span><span class="lab-tag">WebAudio</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER CARD 3 — coming soon -->
+    <div class="lab-card reveal">
+      <div class="lab-card-preview" style="display:flex;align-items:center;justify-content:center;background:var(--bg3);">
+        <div style="text-align:center;opacity:0.3;">
+          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent2);">+</div>
+          <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-top:0.5rem;">
+            <span data-lang="es">Próximamente</span><span data-lang="en">Coming soon</span>
+          </div>
+        </div>
+      </div>
+      <div class="lab-card-body">
+        <div class="lab-card-tag">Python · Automation</div>
+        <div class="lab-card-title"><span data-lang="es">Demo de Automatización</span><span data-lang="en">Automation Demo</span></div>
+        <div class="lab-card-desc">
+          <span data-lang="es">Visualización en tiempo real de pipelines de automatización con Python.</span>
+          <span data-lang="en">Real-time visualization of Python automation pipelines.</span>
+        </div>
+        <div class="lab-card-controls">
+          <span class="lab-tag">Python</span><span class="lab-tag">WebSocket</span><span class="lab-tag">D3.js</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <div>
-    <p class="section-tag reveal">06 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
+    <p class="section-tag reveal">08 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
     <h2 class="contact-title reveal">
       <span data-lang="es">¿Tienes un<br><span>proyecto?</span></span>
       <span data-lang="en">Got a<br><span>project?</span></span>
