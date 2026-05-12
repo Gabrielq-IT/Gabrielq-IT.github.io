@@ -160,6 +160,37 @@
   .lab-card-controls { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
   .lab-tag { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--muted); text-transform: uppercase; border-radius: 3px; }
 
+
+  /* PRICING */
+  #pricing { border-top: 1px solid var(--border); }
+  .pricing-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--text), var(--muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .pricing-sub { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 3.5rem; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .pricing-card { border: 1px solid var(--border); border-radius: 6px; padding: 2rem; background: var(--bg2); position: relative; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+  .pricing-card:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(124,58,237,0.12); transform: translateY(-3px); }
+  .pricing-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(124,58,237,0.2); background: var(--bg3); }
+  .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.25rem 0.9rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border-radius: 20px; white-space: nowrap; }
+  .pricing-name { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 0.25rem; }
+  .pricing-price { font-family: var(--font-display); font-size: 3.5rem; line-height: 1; color: var(--accent); margin: 1rem 0 0.25rem; }
+  .pricing-price span { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); vertical-align: super; }
+  .pricing-price-note { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+  .pricing-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+  .pricing-features li { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.4; }
+  .pricing-features li::before { content: '→'; color: var(--accent2); flex-shrink: 0; }
+  .pricing-features li.no { color: #444466; }
+  .pricing-features li.no::before { content: '×'; color: #333355; }
+  .pricing-cta { display: block; width: 100%; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.85rem; border-radius: 4px; text-decoration: none; transition: all 0.2s; cursor: none; border: 1px solid; }
+  .pricing-cta.primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border-color: transparent; box-shadow: 0 0 20px rgba(124,58,237,0.3); }
+  .pricing-cta.primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .pricing-cta.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+  .pricing-cta.ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+  .pricing-note { margin-top: 3rem; padding: 1.5rem 2rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg2); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .pricing-note-icon { font-size: 2rem; flex-shrink: 0; }
+  .pricing-note-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .pricing-note-text strong { color: var(--text); }
+  @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
+
   /* CONTACT */
   #contact { border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
   .contact-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin-bottom: 1.5rem; }
@@ -232,6 +263,7 @@
     <li><a href="#experience"><span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></a></li>
     <li><a href="#education"><span data-lang="es">Formación</span><span data-lang="en">Education</span></a></li>
     <li><a href="#lab">Lab</a></li>
+    <li><a href="#pricing"><span data-lang="es">Precios</span><span data-lang="en">Pricing</span></a></li>
     <li><a href="#contact"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></a></li>
   </ul>
 </nav>
@@ -508,48 +540,77 @@
       </div>
     </div>
 
-    <!-- PLACEHOLDER CARD 2 — coming soon -->
+    <!-- RF SIGNAL VISUALIZER -->
     <div class="lab-card reveal">
-      <div class="lab-card-preview" style="display:flex;align-items:center;justify-content:center;background:var(--bg3);">
-        <div style="text-align:center;opacity:0.3;">
-          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);">+</div>
-          <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-top:0.5rem;">
-            <span data-lang="es">Próximamente</span><span data-lang="en">Coming soon</span>
-          </div>
+      <div class="lab-card-preview" style="height:280px;background:#060612;position:relative;padding:0;">
+        <canvas id="rfCanvas" style="width:100%;height:100%;display:block;"></canvas>
+        <div style="position:absolute;top:0.75rem;left:1rem;display:flex;gap:1rem;flex-wrap:wrap;z-index:2;">
+          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
+            <span data-lang="es">Frecuencia</span><span data-lang="en">Frequency</span>
+            <input type="range" id="rfFreq" min="1" max="20" value="5" step="0.5" style="width:90px;accent-color:#7c3aed;">
+          </label>
+          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
+            <span data-lang="es">Amplitud</span><span data-lang="en">Amplitude</span>
+            <input type="range" id="rfAmp" min="0.1" max="1" value="0.7" step="0.05" style="width:90px;accent-color:#06b6d4;">
+          </label>
+          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
+            <span data-lang="es">Modulación</span><span data-lang="en">Modulation</span>
+            <select id="rfMod" style="font-family:var(--font-mono);font-size:0.6rem;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:0.2rem 0.4rem;border-radius:3px;cursor:pointer;">
+              <option value="none">CW</option>
+              <option value="am">AM</option>
+              <option value="fm" selected>FM</option>
+              <option value="pulse">Pulse</option>
+              <option value="iq">IQ</option>
+            </select>
+          </label>
+          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
+            <span data-lang="es">Vista</span><span data-lang="en">View</span>
+            <select id="rfView" style="font-family:var(--font-mono);font-size:0.6rem;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:0.2rem 0.4rem;border-radius:3px;cursor:pointer;">
+              <option value="time">Time domain</option>
+              <option value="freq" selected>Spectrum</option>
+              <option value="both">Both</option>
+              <option value="waterfall">Waterfall</option>
+            </select>
+          </label>
         </div>
       </div>
       <div class="lab-card-body">
-        <div class="lab-card-tag">RF · Signal Processing</div>
+        <div class="lab-card-tag">RF · Signal Processing · DSP</div>
         <div class="lab-card-title"><span data-lang="es">Visualizador de Señales RF</span><span data-lang="en">RF Signal Visualizer</span></div>
         <div class="lab-card-desc">
-          <span data-lang="es">Simulación interactiva de señales RF, modulación y espectros de frecuencia.</span>
-          <span data-lang="en">Interactive simulation of RF signals, modulation and frequency spectra.</span>
+          <span data-lang="es">Simulació interactiva de senyals RF en temps real. Canvia freqüència, amplitud i tipus de modulació (AM, FM, Pulse, IQ). Vistes de domini temporal, espectre de freqüències i waterfall.</span>
+          <span data-lang="en">Real-time interactive RF signal simulation. Change frequency, amplitude and modulation type (AM, FM, Pulse, IQ). Time domain, frequency spectrum and waterfall views.</span>
         </div>
         <div class="lab-card-controls">
-          <span class="lab-tag">Canvas</span><span class="lab-tag">DSP</span><span class="lab-tag">WebAudio</span>
+          <span class="lab-tag">Canvas 2D</span><span class="lab-tag">DSP</span><span class="lab-tag">FFT</span><span class="lab-tag">Modulation</span>
         </div>
       </div>
     </div>
 
-    <!-- PLACEHOLDER CARD 3 — coming soon -->
-    <div class="lab-card reveal">
-      <div class="lab-card-preview" style="display:flex;align-items:center;justify-content:center;background:var(--bg3);">
-        <div style="text-align:center;opacity:0.3;">
-          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent2);">+</div>
-          <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-top:0.5rem;">
-            <span data-lang="es">Próximamente</span><span data-lang="en">Coming soon</span>
-          </div>
+    <!-- AUTOMATION PIPELINE DEMO -->
+    <div class="lab-card reveal" style="grid-column: 1 / -1;">
+      <div class="lab-card-preview" style="height:420px;background:#06060f;position:relative;overflow:hidden;">
+        <canvas id="autoCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
+        <!-- Terminal overlay -->
+        <div id="autoTerminal" style="position:absolute;bottom:0;left:0;right:0;height:130px;background:rgba(0,0,0,0.85);border-top:1px solid #1a1a3a;padding:0.6rem 1rem;overflow:hidden;font-family:monospace;font-size:0.72rem;line-height:1.5;"></div>
+        <!-- Controls -->
+        <div style="position:absolute;top:0.75rem;right:0.75rem;display:flex;gap:0.5rem;z-index:3;">
+          <button onclick="autoPipelineRun()" style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;padding:0.35rem 0.7rem;background:rgba(124,58,237,0.2);border:1px solid var(--accent);color:var(--accent);border-radius:3px;cursor:pointer;text-transform:uppercase;transition:background 0.2s;" onmouseover="this.style.background='rgba(124,58,237,0.4)'" onmouseout="this.style.background='rgba(124,58,237,0.2)'">▶ Run</button>
+          <button onclick="autoPipelineReset()" style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;padding:0.35rem 0.7rem;background:rgba(6,182,212,0.1);border:1px solid var(--accent2);color:var(--accent2);border-radius:3px;cursor:pointer;text-transform:uppercase;transition:background 0.2s;" onmouseover="this.style.background='rgba(6,182,212,0.3)'" onmouseout="this.style.background='rgba(6,182,212,0.1)'">↺ Reset</button>
+        </div>
+        <div style="position:absolute;top:0.75rem;left:0.75rem;font-family:var(--font-mono);font-size:0.6rem;color:rgba(6,182,212,0.6);letter-spacing:0.15em;text-transform:uppercase;">
+          pipeline.py — <span id="autoPipeStatus" style="color:#f59e0b;">IDLE</span>
         </div>
       </div>
       <div class="lab-card-body">
-        <div class="lab-card-tag">Python · Automation</div>
-        <div class="lab-card-title"><span data-lang="es">Demo de Automatización</span><span data-lang="en">Automation Demo</span></div>
+        <div class="lab-card-tag">Python · Automation · Pipeline</div>
+        <div class="lab-card-title"><span data-lang="es">Demo de Automatización Python</span><span data-lang="en">Python Automation Demo</span></div>
         <div class="lab-card-desc">
-          <span data-lang="es">Visualización en tiempo real de pipelines de automatización con Python.</span>
-          <span data-lang="en">Real-time visualization of Python automation pipelines.</span>
+          <span data-lang="es">Visualització interactiva d'un pipeline d'automatització Python. Nodes que s'executen en seqüència amb output de terminal en temps real, gestió d'errors i estadístiques de rendiment.</span>
+          <span data-lang="en">Interactive visualization of a Python automation pipeline. Nodes executing in sequence with real-time terminal output, error handling and performance stats.</span>
         </div>
         <div class="lab-card-controls">
-          <span class="lab-tag">Python</span><span class="lab-tag">WebSocket</span><span class="lab-tag">D3.js</span>
+          <span class="lab-tag">Python</span><span class="lab-tag">Canvas 2D</span><span class="lab-tag">Pipeline</span><span class="lab-tag">Async</span>
         </div>
       </div>
     </div>
@@ -557,15 +618,102 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-tag reveal">08 — <span data-lang="es">Servicios & Tarifas</span><span data-lang="en">Services & Pricing</span></p>
+  <h2 class="pricing-title reveal"><span data-lang="es">¿Cuánto cuesta?</span><span data-lang="en">How much does it cost?</span></h2>
+  <p class="pricing-sub reveal"><span data-lang="es">Transparencia total · Sin sorpresas · Presupuesto gratis</span><span data-lang="en">Full transparency · No surprises · Free quote</span></p>
+
+  <div class="pricing-grid">
+
+    <!-- BASIC -->
+    <div class="pricing-card reveal">
+      <div class="pricing-name"><span data-lang="es">Starter</span><span data-lang="en">Starter</span></div>
+      <div class="pricing-price"><span>€</span>299<span data-lang="es"> – 599</span><span data-lang="en"> – 599</span></div>
+      <div class="pricing-price-note"><span data-lang="es">por proyecto</span><span data-lang="en">per project</span></div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span data-lang="es">Landing page o web simple (hasta 5 páginas)</span><span data-lang="en">Landing page or simple website (up to 5 pages)</span></li>
+        <li><span data-lang="es">Diseño responsive (móvil + escritorio)</span><span data-lang="en">Responsive design (mobile + desktop)</span></li>
+        <li><span data-lang="es">Formulario de contacto funcional</span><span data-lang="en">Functional contact form</span></li>
+        <li><span data-lang="es">Entrega en 5–7 días</span><span data-lang="en">Delivery in 5–7 days</span></li>
+        <li><span data-lang="es">1 ronda de revisiones</span><span data-lang="en">1 round of revisions</span></li>
+        <li class="no"><span data-lang="es">Backend / base de datos</span><span data-lang="en">Backend / database</span></li>
+        <li class="no"><span data-lang="es">Mantenimiento incluido</span><span data-lang="en">Maintenance included</span></li>
+      </ul>
+      <button onclick="selectPlan('Starter')" class="pricing-cta ghost"><span data-lang="es">Solicitar presupuesto</span><span data-lang="en">Get a quote</span></button>
+    </div>
+
+    <!-- PRO (featured) -->
+    <div class="pricing-card featured reveal">
+      <div class="pricing-badge"><span data-lang="es">⚡ Más solicitado</span><span data-lang="en">⚡ Most popular</span></div>
+      <div class="pricing-name">Pro</div>
+      <div class="pricing-price"><span>€</span>600<span data-lang="es"> – 1.200</span><span data-lang="en"> – 1.200</span></div>
+      <div class="pricing-price-note"><span data-lang="es">por proyecto</span><span data-lang="en">per project</span></div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span data-lang="es">Web completa con backend (Node.js / Python)</span><span data-lang="en">Full web app with backend (Node.js / Python)</span></li>
+        <li><span data-lang="es">Base de datos SQL integrada</span><span data-lang="en">SQL database integration</span></li>
+        <li><span data-lang="es">Panel de administración básico</span><span data-lang="en">Basic admin dashboard</span></li>
+        <li><span data-lang="es">API REST o integración con terceros</span><span data-lang="en">REST API or third-party integration</span></li>
+        <li><span data-lang="es">Entrega en 10–15 días</span><span data-lang="en">Delivery in 10–15 days</span></li>
+        <li><span data-lang="es">3 rondas de revisiones</span><span data-lang="en">3 rounds of revisions</span></li>
+        <li><span data-lang="es">Deploy incluido (Vercel / VPS)</span><span data-lang="en">Deploy included (Vercel / VPS)</span></li>
+      </ul>
+      <button onclick="selectPlan('Pro')" class="pricing-cta primary"><span data-lang="es">Solicitar presupuesto</span><span data-lang="en">Get a quote</span></button>
+    </div>
+
+    <!-- AUTOMATION -->
+    <div class="pricing-card reveal">
+      <div class="pricing-name"><span data-lang="es">Automatización</span><span data-lang="en">Automation</span></div>
+      <div class="pricing-price"><span>€</span>150<span data-lang="es"> – 500</span><span data-lang="en"> – 500</span></div>
+      <div class="pricing-price-note"><span data-lang="es">por script / pipeline</span><span data-lang="en">per script / pipeline</span></div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><span data-lang="es">Scripts Python a medida</span><span data-lang="en">Custom Python scripts</span></li>
+        <li><span data-lang="es">Automatización de tareas repetitivas</span><span data-lang="en">Repetitive task automation</span></li>
+        <li><span data-lang="es">Scraping / extracción de datos</span><span data-lang="en">Web scraping / data extraction</span></li>
+        <li><span data-lang="es">Pipelines SQL + reporting automático</span><span data-lang="en">SQL pipelines + automatic reporting</span></li>
+        <li><span data-lang="es">Integración con APIs externas</span><span data-lang="en">External API integration</span></li>
+        <li><span data-lang="es">Entrega en 3–7 días</span><span data-lang="en">Delivery in 3–7 days</span></li>
+        <li class="no"><span data-lang="es">Frontend incluido</span><span data-lang="en">Frontend included</span></li>
+      </ul>
+      <button onclick="selectPlan('Automatización')" class="pricing-cta ghost"><span data-lang="es">Solicitar presupuesto</span><span data-lang="en">Get a quote</span></button>
+    </div>
+
+  </div>
+
+  <!-- Note -->
+  <div class="pricing-note reveal">
+    <div class="pricing-note-icon">💬</div>
+    <div class="pricing-note-text">
+      <span data-lang="es"><strong>¿Proyecto a medida?</strong> Estos precios son orientativos. Cada proyecto es diferente — contacta y te envío un presupuesto detallado en menos de 24h, sin compromiso. <strong>Primer proyecto con 10% de descuento.</strong></span>
+      <span data-lang="en"><strong>Custom project?</strong> These prices are indicative. Every project is different — get in touch and I'll send you a detailed quote in under 24h, no commitment. <strong>10% discount on your first project.</strong></span>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div>
-    <p class="section-tag reveal">08 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
+    <p class="section-tag reveal">09 — <span data-lang="es">Hablemos</span><span data-lang="en">Let's talk</span></p>
     <h2 class="contact-title reveal">
       <span data-lang="es">¿Tienes un<br><span>proyecto?</span></span>
       <span data-lang="en">Got a<br><span>project?</span></span>
     </h2>
     <a href="mailto:gabriel.quinones.it@gmail.com" class="contact-email reveal">→ gabriel.quinones.it@gmail.com</a>
+
+    <!-- Selected plan badge -->
+    <div id="selectedPlanBadge" style="display:none;margin-top:1.5rem;">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;">
+        <span data-lang="es">Plan seleccionado</span><span data-lang="en">Selected plan</span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:0.6rem;background:rgba(124,58,237,0.12);border:1px solid var(--accent);border-radius:4px;padding:0.5rem 1rem;">
+        <span id="selectedPlanIcon" style="font-size:1.1rem;"></span>
+        <span id="selectedPlanName" style="font-family:var(--font-display);font-size:1.2rem;color:var(--accent);"></span>
+        <button onclick="clearPlan()" style="font-family:var(--font-mono);font-size:0.6rem;color:var(--muted);background:none;border:none;cursor:pointer;margin-left:0.25rem;opacity:0.6;">✕</button>
+      </div>
+    </div>
   </div>
   <div class="reveal">
     <div class="form-group">
@@ -875,6 +1023,556 @@
     canvas.addEventListener('touchend',()=>{_DR=false;});
 
     let t=0;(function anim(){requestAnimationFrame(anim);t+=.01;if(!_DR){if(_AR){_G.rotation.y+=.0012;}else{_VL.x*=.92;_VL.y*=.92;_G.rotation.y+=_VL.y;_G.rotation.x+=_VL.x;if(Math.abs(_VL.x)<.0001&&Math.abs(_VL.y)<.0001)_AR=true;}}_CM.forEach(({ring,rm},i)=>{if(!_SC2)return;ring.scale.setScalar(1+.3*Math.sin(t*2+i*.8));rm.opacity=.12+.18*Math.sin(t*2+i*.8);});_REN.render(_SCN,_CAM);})();
+  }
+
+  // RF SIGNAL VISUALIZER
+  (function(){
+    const canvas = document.getElementById('rfCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    function resize(){
+      W = canvas.width = canvas.parentElement.clientWidth;
+      H = canvas.height = canvas.parentElement.clientHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Waterfall buffer
+    const WF_ROWS = 80;
+    let wfBuffer = [];
+
+    // Simple FFT magnitude (DFT for display)
+    function computeSpectrum(signal, bins){
+      const N = signal.length;
+      const out = new Float32Array(bins);
+      for(let k=0; k<bins; k++){
+        let re=0, im=0;
+        for(let n=0; n<N; n++){
+          const ang = 2*Math.PI*k*n/N;
+          re += signal[n]*Math.cos(ang);
+          im -= signal[n]*Math.sin(ang);
+        }
+        out[k] = Math.sqrt(re*re+im*im)/N;
+      }
+      return out;
+    }
+
+    let t = 0;
+    function buildSignal(samples){
+      const freq  = parseFloat(document.getElementById('rfFreq')?.value||5);
+      const amp   = parseFloat(document.getElementById('rfAmp')?.value||0.7);
+      const mod   = document.getElementById('rfMod')?.value||'fm';
+      const sig   = new Float32Array(samples);
+      const fm    = 0.3; // modulating freq
+      for(let i=0; i<samples; i++){
+        const ti = t + i/samples;
+        let s = 0;
+        switch(mod){
+          case 'none':
+            s = amp * Math.sin(2*Math.PI*freq*ti);
+            break;
+          case 'am':
+            s = amp * (1 + 0.5*Math.sin(2*Math.PI*fm*ti)) * Math.sin(2*Math.PI*freq*ti);
+            break;
+          case 'fm':
+            s = amp * Math.sin(2*Math.PI*freq*ti + 2*Math.sin(2*Math.PI*fm*ti));
+            break;
+          case 'pulse':
+            s = amp * (Math.sin(2*Math.PI*freq*ti) > 0.3 ? 1 : 0) * 0.9;
+            break;
+          case 'iq':
+            s = amp * Math.sin(2*Math.PI*freq*ti) * Math.cos(2*Math.PI*fm*ti*0.5);
+            break;
+        }
+        // Add small noise
+        s += (Math.random()-0.5)*0.04;
+        sig[i] = s;
+      }
+      return sig;
+    }
+
+    function drawTimeDomain(sig, x0, y0, w, h){
+      // Grid
+      ctx.strokeStyle='rgba(124,58,237,0.15)';ctx.lineWidth=0.5;
+      for(let g=0;g<=4;g++){
+        const y=y0+g*(h/4);
+        ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x0+w,y);ctx.stroke();
+      }
+      ctx.strokeStyle='rgba(124,58,237,0.2)';
+      for(let g=0;g<=8;g++){
+        const x=x0+g*(w/8);
+        ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y0+h);ctx.stroke();
+      }
+      // Zero line
+      ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(x0,y0+h/2);ctx.lineTo(x0+w,y0+h/2);ctx.stroke();
+
+      // Signal
+      const grad=ctx.createLinearGradient(x0,y0,x0+w,y0);
+      grad.addColorStop(0,'#7c3aed');grad.addColorStop(0.5,'#06b6d4');grad.addColorStop(1,'#7c3aed');
+      ctx.strokeStyle=grad;ctx.lineWidth=1.5;
+      ctx.beginPath();
+      for(let i=0;i<sig.length;i++){
+        const x=x0+i/sig.length*w;
+        const y=y0+h/2 - sig[i]*(h/2)*0.85;
+        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+
+      // Glow
+      ctx.strokeStyle='rgba(6,182,212,0.15)';ctx.lineWidth=4;
+      ctx.beginPath();
+      for(let i=0;i<sig.length;i++){
+        const x=x0+i/sig.length*w;
+        const y=y0+h/2 - sig[i]*(h/2)*0.85;
+        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle='rgba(6,182,212,0.6)';ctx.font='bold 9px monospace';
+      ctx.fillText('TIME DOMAIN',x0+6,y0+14);
+    }
+
+    function drawSpectrum(sig, x0, y0, w, h){
+      const BINS = 64;
+      const spec = computeSpectrum(sig, BINS);
+      const maxV = Math.max(...spec, 0.01);
+
+      // Grid
+      ctx.strokeStyle='rgba(124,58,237,0.15)';ctx.lineWidth=0.5;
+      for(let g=0;g<=4;g++){
+        const y=y0+g*(h/4);
+        ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x0+w,y);ctx.stroke();
+      }
+
+      // Bars
+      const bw = w/BINS;
+      for(let i=0;i<BINS;i++){
+        const bh = (spec[i]/maxV)*h*0.92;
+        const hue = 260 + (spec[i]/maxV)*60;
+        const alpha = 0.4 + (spec[i]/maxV)*0.6;
+        ctx.fillStyle=`hsla(${hue},80%,60%,${alpha})`;
+        ctx.fillRect(x0+i*bw, y0+h-bh, bw-1, bh);
+
+        // Top glow
+        ctx.fillStyle=`hsla(${hue},90%,80%,${alpha*0.8})`;
+        ctx.fillRect(x0+i*bw, y0+h-bh, bw-1, 2);
+      }
+
+      // Freq axis labels
+      const freq=parseFloat(document.getElementById('rfFreq')?.value||5);
+      ctx.fillStyle='rgba(6,182,212,0.5)';ctx.font='8px monospace';
+      ctx.fillText('0',x0+2,y0+h-3);
+      ctx.fillText((freq*2).toFixed(0)+'GHz',x0+w/2-14,y0+h-3);
+
+      ctx.fillStyle='rgba(6,182,212,0.6)';ctx.font='bold 9px monospace';
+      ctx.fillText('SPECTRUM',x0+6,y0+14);
+    }
+
+    function drawWaterfall(sig, x0, y0, w, h){
+      const BINS = 128;
+      const spec = computeSpectrum(sig.slice(0,256), BINS);
+      const maxV = Math.max(...spec,0.01);
+
+      // Add new row
+      const row = Array.from(spec).map(v=>v/maxV);
+      wfBuffer.push(row);
+      if(wfBuffer.length>WF_ROWS) wfBuffer.shift();
+
+      const rh = h/WF_ROWS;
+      const bw = w/BINS;
+      wfBuffer.forEach((r,ri)=>{
+        r.forEach((v,bi)=>{
+          const hue = 260-v*220;
+          const light = 15+v*65;
+          ctx.fillStyle=`hsl(${hue},80%,${light}%)`;
+          ctx.fillRect(x0+bi*bw, y0+ri*rh, bw+0.5, rh+0.5);
+        });
+      });
+
+      ctx.fillStyle='rgba(6,182,212,0.6)';ctx.font='bold 9px monospace';
+      ctx.fillText('WATERFALL',x0+6,y0+14);
+
+      // Freq label
+      const freq=parseFloat(document.getElementById('rfFreq')?.value||5);
+      ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='8px monospace';
+      ctx.fillText('f →',x0+w-20,y0+h-3);
+      ctx.fillText('t ↓',x0+2,y0+h-3);
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      // Background
+      ctx.fillStyle='#060612';ctx.fillRect(0,0,W,H);
+
+      const SAMPLES=256;
+      const sig=buildSignal(SAMPLES);
+      const view=document.getElementById('rfView')?.value||'freq';
+
+      const pad=10;
+      if(view==='time'){
+        drawTimeDomain(sig,pad,pad,W-pad*2,H-pad*2);
+      } else if(view==='freq'){
+        drawSpectrum(sig,pad,pad,W-pad*2,H-pad*2);
+      } else if(view==='both'){
+        const half=(H-pad*3)/2;
+        drawTimeDomain(sig,pad,pad,W-pad*2,half);
+        drawSpectrum(sig,pad,pad*2+half,W-pad*2,half);
+      } else if(view==='waterfall'){
+        drawWaterfall(sig,pad,pad,W-pad*2,H-pad*2);
+      }
+
+      // Frequency readout
+      const freq=parseFloat(document.getElementById('rfFreq')?.value||5);
+      const amp=parseFloat(document.getElementById('rfAmp')?.value||0.7);
+      const mod=(document.getElementById('rfMod')?.value||'fm').toUpperCase();
+      ctx.fillStyle='rgba(124,58,237,0.7)';ctx.font='bold 9px monospace';
+      ctx.fillText(`${freq.toFixed(1)} GHz · ${(amp*100).toFixed(0)}% · ${mod}`,W-160,H-8);
+
+      t+=0.018;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // AUTOMATION PIPELINE DEMO
+  (function(){
+    const canvas = document.getElementById('autoCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    function resize(){
+      const wrap = canvas.parentElement;
+      W = canvas.width = wrap.clientWidth;
+      H = canvas.height = wrap.clientHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); drawStatic(); });
+
+    // Pipeline nodes definition
+    const PIPELINE = [
+      { id:0, label:'fetch_data()',   icon:'📥', lang:'es', desc:'Obteniendo datos de la API...', descEn:'Fetching data from API...', duration:1800, color:'#7c3aed' },
+      { id:1, label:'validate()',     icon:'🔍', lang:'es', desc:'Validando esquema y tipos...', descEn:'Validating schema and types...', duration:1200, color:'#06b6d4' },
+      { id:2, label:'transform()',    icon:'⚙️', lang:'es', desc:'Transformando registros...', descEn:'Transforming records...', duration:2200, color:'#7c3aed' },
+      { id:3, label:'filter()',       icon:'🧹', lang:'es', desc:'Filtrando duplicados...', descEn:'Filtering duplicates...', duration:900,  color:'#06b6d4' },
+      { id:4, label:'enrich()',       icon:'✨', lang:'es', desc:'Enriqueciendo con metadatos...', descEn:'Enriching with metadata...', duration:1500, color:'#7c3aed' },
+      { id:5, label:'save_to_db()',   icon:'💾', lang:'es', desc:'Guardando en PostgreSQL...', descEn:'Saving to PostgreSQL...', duration:1000, color:'#06b6d4' },
+      { id:6, label:'send_report()',  icon:'📧', lang:'es', desc:'Enviando reporte por email...', descEn:'Sending email report...', duration:700,  color:'#f59e0b' },
+      { id:7, label:'done ✓',         icon:'✅', lang:'es', desc:'Pipeline completado.', descEn:'Pipeline completed.', duration:0, color:'#22c55e' },
+    ];
+
+    // State
+    let nodeStates = new Array(PIPELINE.length).fill('idle'); // idle | running | done | error
+    let activeNode = -1;
+    let particles = [];
+    let running = false;
+    let animFrame = 0;
+    let stats = { total: 0, processed: 0, errors: 0, time: 0 };
+    let startTime = 0;
+    let termLines = [];
+
+    // Layout: nodes in two rows
+    function getNodePos(i) {
+      const cols = 4;
+      const row = Math.floor(i / cols);
+      const col = i % cols;
+      const topH = H - 140; // canvas area above terminal
+      const cellW = W / cols;
+      const cellH = (topH - 60) / 2;
+      return {
+        x: cellW * col + cellW / 2,
+        y: 50 + row * cellH + cellH / 2
+      };
+    }
+
+    function addTermLine(txt, color) {
+      const ts = new Date().toISOString().substr(11,8);
+      termLines.push({ ts, txt, color: color||'#aaaacc' });
+      if(termLines.length > 8) termLines.shift();
+      renderTerminal();
+    }
+
+    function renderTerminal() {
+      const el = document.getElementById('autoTerminal');
+      if(!el) return;
+      el.innerHTML = termLines.map(l =>
+        `<div><span style="color:#555">${l.ts}</span> <span style="color:${l.color}">${l.txt}</span></div>`
+      ).join('');
+      el.scrollTop = el.scrollHeight;
+    }
+
+    function spawnParticles(fromIdx, toIdx) {
+      const from = getNodePos(fromIdx);
+      const to   = getNodePos(toIdx);
+      for(let i=0; i<12; i++){
+        particles.push({
+          x: from.x, y: from.y,
+          tx: to.x,  ty: to.y,
+          progress: 0,
+          speed: 0.015 + Math.random()*0.02,
+          size: 2 + Math.random()*2,
+          color: PIPELINE[fromIdx].color,
+          trail: []
+        });
+      }
+    }
+
+    function drawNode(i, state) {
+      const { x, y } = getNodePos(i);
+      const n = PIPELINE[i];
+      const r = 36;
+
+      // Connection line to next node
+      if(i < PIPELINE.length - 1) {
+        const next = getNodePos(i+1);
+        const grad = ctx.createLinearGradient(x, y, next.x, next.y);
+        const alpha = state === 'done' ? 0.5 : 0.12;
+        grad.addColorStop(0, state==='done' ? n.color : '#2a2a45');
+        grad.addColorStop(1, state==='done' ? PIPELINE[i+1].color : '#2a2a45');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = state === 'done' ? 2 : 1;
+        ctx.setLineDash(state === 'done' ? [] : [4,6]);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(next.x, next.y); ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Outer glow if running
+      if(state === 'running') {
+        const pulse = 0.5 + 0.5 * Math.sin(animFrame * 0.12);
+        const glowR = r + 10 + pulse * 8;
+        const glow = ctx.createRadialGradient(x, y, r, x, y, glowR);
+        glow.addColorStop(0, n.color + '55');
+        glow.addColorStop(1, 'transparent');
+        ctx.fillStyle = glow;
+        ctx.beginPath(); ctx.arc(x, y, glowR, 0, Math.PI*2); ctx.fill();
+      }
+
+      // Circle bg
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+      if(state === 'idle')    ctx.fillStyle = '#0f0f22';
+      if(state === 'running') ctx.fillStyle = n.color + '33';
+      if(state === 'done')    ctx.fillStyle = n.color + '22';
+      if(state === 'error')   ctx.fillStyle = '#ff003c22';
+      ctx.fill();
+
+      // Circle border
+      ctx.strokeStyle = state==='idle' ? '#2a2a45' : state==='error' ? '#ff003c' : n.color;
+      ctx.lineWidth = state==='running' ? 2.5 : 1.5;
+      ctx.stroke();
+
+      // Progress arc if running
+      if(state === 'running') {
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth = 3;
+        const angle = (animFrame % 80) / 80 * Math.PI * 2;
+        ctx.beginPath(); ctx.arc(x, y, r+4, angle, angle + Math.PI * 1.2);
+        ctx.stroke();
+      }
+
+      // Done checkmark ring
+      if(state === 'done') {
+        ctx.strokeStyle = n.color + 'aa';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(x, y, r+5, 0, Math.PI*2); ctx.stroke();
+      }
+
+      // Icon
+      ctx.font = '18px serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.globalAlpha = state === 'idle' ? 0.3 : 1;
+      ctx.fillText(n.icon, x, y - 4);
+      ctx.globalAlpha = 1;
+
+      // Label
+      ctx.font = 'bold 9px monospace';
+      ctx.fillStyle = state==='idle' ? '#444466' : state==='done' ? n.color : '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, x, y + 14);
+
+      // Status badge
+      if(state !== 'idle') {
+        ctx.font = '8px monospace';
+        ctx.fillStyle = state==='running' ? '#f59e0b' : state==='done' ? '#22c55e' : '#ff003c';
+        ctx.fillText(state.toUpperCase(), x, y + r + 14);
+      }
+    }
+
+    function drawStats() {
+      const elapsed = running || stats.time ? ((Date.now() - startTime)/1000).toFixed(1) : '0.0';
+      const topH = H - 140;
+      ctx.fillStyle = 'rgba(124,58,237,0.08)';
+      ctx.fillRect(0, topH - 30, W, 28);
+      ctx.font = '9px monospace'; ctx.textAlign = 'left';
+      const items = [
+        { label:'RECORDS', val: stats.processed, color:'#06b6d4' },
+        { label:'ERRORS',  val: stats.errors,    color: stats.errors ? '#ff003c' : '#444466' },
+        { label:'TIME',    val: elapsed+'s',      color:'#f59e0b' },
+        { label:'STATUS',  val: running ? 'RUNNING' : activeNode>=0 ? 'DONE' : 'IDLE', color: running ? '#f59e0b' : activeNode>=0 ? '#22c55e' : '#555577' },
+      ];
+      items.forEach((it,i) => {
+        const x = 20 + i*(W/4);
+        ctx.fillStyle = '#555577'; ctx.fillText(it.label, x, topH-16);
+        ctx.fillStyle = it.color; ctx.font = 'bold 10px monospace';
+        ctx.fillText(it.val, x+52, topH-16);
+        ctx.font = '9px monospace';
+      });
+    }
+
+    function drawParticles() {
+      particles = particles.filter(p => p.progress < 1);
+      particles.forEach(p => {
+        p.progress = Math.min(1, p.progress + p.speed);
+        p.x = p.x + (p.tx - p.x) * p.speed * 3;
+        p.y = p.y + (p.ty - p.y) * p.speed * 3;
+        p.trail.push({x:p.x, y:p.y});
+        if(p.trail.length > 8) p.trail.shift();
+        // Trail
+        p.trail.forEach((pt,ti) => {
+          const alpha = (ti/p.trail.length)*0.4;
+          ctx.beginPath(); ctx.arc(pt.x, pt.y, p.size*0.5, 0, Math.PI*2);
+          ctx.fillStyle = p.color + Math.floor(alpha*255).toString(16).padStart(2,'0');
+          ctx.fill();
+        });
+        // Dot
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = p.color; ctx.fill();
+      });
+    }
+
+    function drawStatic() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#06060f'; ctx.fillRect(0, 0, W, H);
+      // Subtle grid bg
+      ctx.strokeStyle = 'rgba(124,58,237,0.04)'; ctx.lineWidth = 0.5;
+      for(let x=0; x<W; x+=40){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke(); }
+      for(let y=0; y<H; y+=40){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke(); }
+      PIPELINE.forEach((n,i) => drawNode(i, nodeStates[i]));
+      drawParticles();
+      drawStats();
+      animFrame++;
+    }
+
+    // Animation loop
+    let loopId;
+    function loop() { drawStatic(); loopId = requestAnimationFrame(loop); }
+    loop();
+
+    // Run pipeline
+    window.autoPipelineRun = function() {
+      if(running) return;
+      running = true;
+      startTime = Date.now();
+      nodeStates = new Array(PIPELINE.length).fill('idle');
+      activeNode = -1;
+      particles = [];
+      termLines = [];
+      stats = { processed: Math.floor(Math.random()*8000+2000), errors: 0, time: 0 };
+      document.getElementById('autoPipeStatus').textContent = 'RUNNING';
+      document.getElementById('autoPipeStatus').style.color = '#f59e0b';
+      addTermLine('$ python3 pipeline.py', '#7c3aed');
+      addTermLine('Inicializando pipeline...', '#888899');
+      runStep(0);
+    };
+
+    function runStep(i) {
+      if(i >= PIPELINE.length){ finishPipeline(); return; }
+      const n = PIPELINE[i];
+      nodeStates[i] = 'running';
+      activeNode = i;
+      const lang = document.body.classList.contains('lang-en') ? n.descEn : n.desc;
+      addTermLine(`[${i+1}/${PIPELINE.length}] ${n.label} — ${lang}`, n.color);
+      // Random chance of error on some nodes (except last)
+      const hasError = i>0 && i<PIPELINE.length-1 && Math.random()<0.07;
+      setTimeout(() => {
+        if(hasError) {
+          nodeStates[i] = 'error';
+          stats.errors++;
+          addTermLine(`  ✗ Warning: timeout retrying...`, '#ff003c');
+          setTimeout(() => {
+            nodeStates[i] = 'done';
+            if(i < PIPELINE.length-1) spawnParticles(i, i+1);
+            addTermLine(`  ✓ Recovered OK`, '#22c55e');
+            runStep(i+1);
+          }, 600);
+        } else {
+          nodeStates[i] = 'done';
+          if(i < PIPELINE.length-1) spawnParticles(i, i+1);
+          if(i===5) addTermLine(`  → ${stats.processed} rows inserted`, '#06b6d4');
+          runStep(i+1);
+        }
+      }, n.duration);
+    }
+
+    function finishPipeline() {
+      running = false;
+      stats.time = ((Date.now()-startTime)/1000).toFixed(2);
+      document.getElementById('autoPipeStatus').textContent = 'DONE';
+      document.getElementById('autoPipeStatus').style.color = '#22c55e';
+      addTermLine(`Pipeline completado en ${stats.time}s · ${stats.errors} warnings`, '#22c55e');
+      addTermLine(`✓ ${stats.processed} records processed successfully`, '#06b6d4');
+    }
+
+    window.autoPipelineReset = function() {
+      running = false;
+      nodeStates = new Array(PIPELINE.length).fill('idle');
+      activeNode = -1;
+      particles = [];
+      termLines = [];
+      stats = { total:0, processed:0, errors:0, time:0 };
+      document.getElementById('autoPipeStatus').textContent = 'IDLE';
+      document.getElementById('autoPipeStatus').style.color = '#f59e0b';
+      renderTerminal();
+    };
+
+    // Initial terminal hint
+    addTermLine('$ Ready. Press ▶ Run to execute pipeline.', '#555577');
+  })();
+
+  // PLAN SELECTOR
+  const planData = {
+    'Starter':        { icon:'🚀', es:'Hola Gabriel,\n\nEstoy interesado en el plan Starter (299–599€).\n\nMi proyecto consiste en:\n', en:'Hi Gabriel,\n\nI\'m interested in the Starter plan (€299–599).\n\nMy project is:\n' },
+    'Pro':            { icon:'⚡', es:'Hola Gabriel,\n\nEstoy interesado en el plan Pro (600–1.200€).\n\nMi proyecto consiste en:\n', en:'Hi Gabriel,\n\nI\'m interested in the Pro plan (€600–1,200).\n\nMy project is:\n' },
+    'Automatización': { icon:'🤖', es:'Hola Gabriel,\n\nEstoy interesado en el servicio de Automatización (150–500€).\n\nLo que necesito automatizar:\n', en:'Hi Gabriel,\n\nI\'m interested in the Automation service (€150–500).\n\nWhat I need to automate:\n' },
+  };
+
+  function selectPlan(planKey) {
+    const lang = document.body.classList.contains('lang-en') ? 'en' : 'es';
+    const plan = planData[planKey];
+    if(!plan) return;
+
+    // Fill textarea
+    const msg = document.getElementById('fmessage');
+    if(msg) msg.value = plan[lang];
+
+    // Show badge
+    const badge = document.getElementById('selectedPlanBadge');
+    const icon  = document.getElementById('selectedPlanIcon');
+    const name  = document.getElementById('selectedPlanName');
+    if(badge){ badge.style.display = 'block'; }
+    if(icon) icon.textContent = plan.icon;
+    if(name) name.textContent = planKey;
+
+    // Highlight selected card
+    document.querySelectorAll('.pricing-card').forEach(c => c.style.outline = 'none');
+    const cards = document.querySelectorAll('.pricing-card');
+    const idx = Object.keys(planData).indexOf(planKey);
+    if(cards[idx]) cards[idx].style.outline = '2px solid var(--accent2)';
+
+    // Scroll to contact
+    document.getElementById('contact').scrollIntoView({ behavior:'smooth', block:'start' });
+
+    // Focus textarea after scroll
+    setTimeout(() => { if(msg){ msg.focus(); msg.setSelectionRange(msg.value.length, msg.value.length); } }, 600);
+  }
+
+  function clearPlan() {
+    document.getElementById('selectedPlanBadge').style.display = 'none';
+    document.getElementById('fmessage').value = '';
+    document.querySelectorAll('.pricing-card').forEach(c => c.style.outline = 'none');
   }
 
   // FORM
