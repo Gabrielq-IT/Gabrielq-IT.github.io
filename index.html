@@ -541,21 +541,25 @@
     </div>
 
     <!-- RF SIGNAL VISUALIZER -->
-    <div class="lab-card reveal">
-      <div class="lab-card-preview" style="height:280px;background:#060612;position:relative;padding:0;">
-        <canvas id="rfCanvas" style="width:100%;height:100%;display:block;"></canvas>
-        <div style="position:absolute;top:0.75rem;left:1rem;display:flex;gap:1rem;flex-wrap:wrap;z-index:2;">
-          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
-            <span data-lang="es">Frecuencia</span><span data-lang="en">Frequency</span>
-            <input type="range" id="rfFreq" min="1" max="20" value="5" step="0.5" style="width:90px;accent-color:#7c3aed;">
+    <div class="lab-card reveal" style="grid-column: 1 / -1;">
+      <div class="lab-card-preview" style="height:400px;background:#060612;position:relative;padding:0;overflow:hidden;">
+        <!-- Canvas fills entire preview -->
+        <canvas id="rfCanvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
+        <!-- Controls bar at bottom -->
+        <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(6,6,18,0.92);border-top:1px solid #1a1a3a;padding:0.75rem 1.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;z-index:2;backdrop-filter:blur(8px);">
+          <label style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem;white-space:nowrap;">
+            <span data-lang="es">Freq</span><span data-lang="en">Freq</span>
+            <input type="range" id="rfFreq" min="1" max="20" value="5" step="0.5" style="width:120px;accent-color:#7c3aed;cursor:pointer;">
+            <span id="rfFreqVal" style="color:#7c3aed;min-width:40px;">5 GHz</span>
           </label>
-          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
-            <span data-lang="es">Amplitud</span><span data-lang="en">Amplitude</span>
-            <input type="range" id="rfAmp" min="0.1" max="1" value="0.7" step="0.05" style="width:90px;accent-color:#06b6d4;">
+          <label style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem;white-space:nowrap;">
+            <span data-lang="es">Amp</span><span data-lang="en">Amp</span>
+            <input type="range" id="rfAmp" min="0.1" max="1" value="0.7" step="0.05" style="width:100px;accent-color:#06b6d4;cursor:pointer;">
+            <span id="rfAmpVal" style="color:#06b6d4;min-width:32px;">70%</span>
           </label>
-          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
-            <span data-lang="es">Modulación</span><span data-lang="en">Modulation</span>
-            <select id="rfMod" style="font-family:var(--font-mono);font-size:0.6rem;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:0.2rem 0.4rem;border-radius:3px;cursor:pointer;">
+          <label style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem;white-space:nowrap;">
+            MOD
+            <select id="rfMod" style="font-family:var(--font-mono);font-size:0.62rem;background:#0f0f22;color:var(--text);border:1px solid #2a2a45;padding:0.3rem 0.5rem;border-radius:3px;cursor:pointer;">
               <option value="none">CW</option>
               <option value="am">AM</option>
               <option value="fm" selected>FM</option>
@@ -563,15 +567,19 @@
               <option value="iq">IQ</option>
             </select>
           </label>
-          <label style="font-family:var(--font-mono);font-size:0.6rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;flex-direction:column;gap:0.3rem;">
+          <label style="font-family:var(--font-mono);font-size:0.62rem;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem;white-space:nowrap;">
             <span data-lang="es">Vista</span><span data-lang="en">View</span>
-            <select id="rfView" style="font-family:var(--font-mono);font-size:0.6rem;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:0.2rem 0.4rem;border-radius:3px;cursor:pointer;">
+            <select id="rfView" style="font-family:var(--font-mono);font-size:0.62rem;background:#0f0f22;color:var(--text);border:1px solid #2a2a45;padding:0.3rem 0.5rem;border-radius:3px;cursor:pointer;">
               <option value="time">Time domain</option>
               <option value="freq" selected>Spectrum</option>
               <option value="both">Both</option>
               <option value="waterfall">Waterfall</option>
             </select>
           </label>
+        </div>
+        <!-- Title overlay top-left -->
+        <div style="position:absolute;top:1rem;left:1.5rem;font-family:var(--font-mono);font-size:0.62rem;color:rgba(6,182,212,0.55);letter-spacing:0.18em;text-transform:uppercase;pointer-events:none;">
+          RF SIGNAL VISUALIZER · LIVE
         </div>
       </div>
       <div class="lab-card-body">
@@ -1038,6 +1046,14 @@
     }
     resize();
     window.addEventListener('resize', resize);
+
+    // Live slider value display
+    const freqSlider = document.getElementById('rfFreq');
+    const ampSlider  = document.getElementById('rfAmp');
+    const freqVal    = document.getElementById('rfFreqVal');
+    const ampVal     = document.getElementById('rfAmpVal');
+    if(freqSlider && freqVal) freqSlider.addEventListener('input', () => freqVal.textContent = parseFloat(freqSlider.value).toFixed(1) + ' GHz');
+    if(ampSlider  && ampVal)  ampSlider.addEventListener('input',  () => ampVal.textContent  = Math.round(parseFloat(ampSlider.value)*100) + '%');
 
     // Waterfall buffer
     const WF_ROWS = 80;
